@@ -8,8 +8,7 @@ orbs:
 jobs:
   example-job:
     docker:
-      # replace with your preferred image
-      - image: cimg/base:stable
+      - image: windows-server-2019-nvidia:stable
     steps:
       - codecov/upload:
           token: 'e1abd556-215f-4e20-94f8-db37fa7f0cb5' 
