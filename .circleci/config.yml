@@ -6,7 +6,7 @@ orbs:
 jobs:
   test:
     description: Setup and run application tests
-    working_directory: ~/ProjectAthenaBackend/test
+    working_directory: ~/test
     executor:
       name: windows/default
     steps:
@@ -69,16 +69,16 @@ jobs:
       
       - run:
           name: "Run Common Tests"
-          command: dotnet.exe test AthenaBackend.CommonTest/AthenaBackend.CommonTest.csproj  -v n --results-directory:test\test_coverage --collect:"Code Coverage"
+          command: dotnet.exe test ~/AthenaBackend.CommonTest/AthenaBackend.CommonTest.csproj  -v n --results-directory:test\test_coverage --collect:"Code Coverage"
       - run:
           name: "Run Domain Tests"
-          command: dotnet.exe test AthenaBackend.DomainTest/AthenaBackend.DomainTest.csproj  -v n --results-directory:test\test_coverage --collect:"Code Coverage"
+          command: dotnet.exe test ~/AthenaBackend.DomainTest/AthenaBackend.DomainTest.csproj  -v n --results-directory:test\test_coverage --collect:"Code Coverage"
       - run:
           name: "Run Infrastructure Tests"
-          command: dotnet.exe test AthenaBackend.InfrastructureTest/AthenaBackend.InfrastructureTest.csproj  -v n --results-directory:test\test_coverage --collect:"Code Coverage"
+          command: dotnet.exe test ~/AthenaBackend.InfrastructureTest/AthenaBackend.InfrastructureTest.csproj  -v n --results-directory:test\test_coverage --collect:"Code Coverage"
       - run:
           name: "Run Application Tests"
-          command: dotnet.exe test AthenaBackend.ApplicationTest/AthenaBackend.ApplicationTest.csproj  -v n --results-directory:test\test_coverage --collect:"Code Coverage"
+          command: dotnet.exe test ~/AthenaBackend.ApplicationTest/AthenaBackend.ApplicationTest.csproj  -v n --results-directory:test\test_coverage --collect:"Code Coverage"
       
       - run:
           name: "Print Working Directory"
