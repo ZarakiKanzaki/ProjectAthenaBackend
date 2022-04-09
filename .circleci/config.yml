@@ -2,7 +2,6 @@ version: 2.1
 
 orbs:
   windows: circleci/windows@4.1.1
-  codecov: codecov/codecov@3.2.2
     
 jobs:
   test:
@@ -48,7 +47,13 @@ jobs:
           path: C:\Users\circleci\project\test\test_coverage
       - store_test_results:
           path: C:\Users\circleci\project\test\test_coverage
-           
+      
+      - run:
+          name: "Upload test to CodeCov"
+          command: |
+            $ProgressPreference = 'SilentlyContinue'
+            Invoke-WebRequest -Uri https://uploader.codecov.io/latest/windows/codecov.exe -Outfile codecov.exe
+            .\codecov.exe
       # - codecov/upload:
       #     file: C:\Users\circleci\project\test\test_coverage\Cobertura.xml 
       #     #flags: unittests
