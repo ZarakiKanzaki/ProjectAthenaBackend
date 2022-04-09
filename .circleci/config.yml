@@ -2,7 +2,8 @@ version: 2.1
 
 orbs:
   windows: circleci/windows@4.1.1
-    
+  codecov: codecov/codecov@3.2.2 
+
 jobs:
   test:
     description: Setup and run application tests
@@ -49,14 +50,15 @@ jobs:
           path: C:\Users\circleci\project\test\test_coverage
       
       - run:
-          name: "Upload test to CodeCov"
+          name: "Download Codecov Uploader"
           command: |
             $ProgressPreference = 'SilentlyContinue'
             Invoke-WebRequest -Uri https://uploader.codecov.io/latest/windows/codecov.exe -Outfile codecov.exe
             .\codecov.exe
-      # - codecov/upload:
-      #     file: C:\Users\circleci\project\test\test_coverage\Cobertura.xml 
-      #     #flags: unittests
+      - codecov/upload:
+          file: C:\Users\circleci\project\test\test_coverage\*.xml 
+          #flags: unittests
+
   build:
     description: Build application with Release configuration
     executor:
