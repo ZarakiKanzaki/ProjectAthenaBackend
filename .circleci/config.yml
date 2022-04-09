@@ -17,9 +17,14 @@ jobs:
             - dotnet-packages-v1-{{ checksum "src/AthenaBackend.Infrastructure/AthenaBackend.Infrastructure.csproj" }}
             - dotnet-packages-v1-{{ checksum "src/AthenaBackend.Application/AthenaBackend.Application.csproj" }}
             - dotnet-packages-v1-{{ checksum "src/AthenaBackend.Common/AthenaBackend.Common.csproj" }}
+            - dotnet-packages-v1-{{ checksum "test/AthenaBackend.DomainTest/AthenaBackend.DomainTest.csproj" }}
+            - dotnet-packages-v1-{{ checksum "test/AthenaBackend.ApplicationTest/AthenaBackend.ApplicationTest.csproj" }}
+            - dotnet-packages-v1-{{ checksum "test/AthenaBackend.CommonTest/AthenaBackend.CommonTest.csproj" }}
+            - dotnet-packages-v1-{{ checksum "test/AthenaBackend.InfrastructureTest/AthenaBackend.InfrastructureTest.csproj" }}
       - run:
           name: "Install project dependencies"
           command: dotnet.exe restore
+          
       - save_cache:
           paths:
             - C:\Users\circleci\.nuget\packages
@@ -40,9 +45,26 @@ jobs:
           paths:
             - C:\Users\circleci\.nuget\packages
           key: dotnet-packages-v1-{{ checksum "src/AthenaBackend.Common/AthenaBackend.Common.csproj" }}
+      - save_cache:
+          paths:
+            - C:\Users\circleci\.nuget\packages
+          key: dotnet-packages-v1-{{ checksum "test/AthenaBackend.DomainTest/AthenaBackend.DomainTest.csproj" }}
+      - save_cache:
+          paths:
+            - C:\Users\circleci\.nuget\packages
+          key: dotnet-packages-v1-{{ checksum "test/AthenaBackend.ApplicationTest/AthenaBackend.ApplicationTest.csproj" }}
+      - save_cache:
+          paths:
+            - C:\Users\circleci\.nuget\packages
+          key: dotnet-packages-v1-{{ checksum "test/AthenaBackend.CommonTest/AthenaBackend.CommonTest.csproj" }}
+      - save_cache:
+          paths:
+            - C:\Users\circleci\.nuget\packages
+          key: dotnet-packages-v1-{{ checksum "test/AthenaBackend.InfrastructureTest/AthenaBackend.InfrastructureTest.csproj" }}
+     
       - run:
           name: "Run Domain Tests"
-          command: dotnet.exe test "test/AthenaBackend.DomainTest/AthenaBackend.DomainTest.csproj"  -v n --results-directory:test\test_coverage --collect:"Code Coverage"
+          command: dotnet.exe test  -v n --results-directory:test\test_coverage --collect:"Code Coverage"
       - run:
           name: "Print Working Directory"
           command: pwd
