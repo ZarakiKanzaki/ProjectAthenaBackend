@@ -39,6 +39,8 @@ jobs:
           command: pwd
       - store_artifacts:
           path: C:\Users\circleci\project\test\test_coverage
+      - store_test_results:
+          path: C:\Users\circleci\project\test\test_coverage
   build:
     description: Build application with Release configuration
     executor:
