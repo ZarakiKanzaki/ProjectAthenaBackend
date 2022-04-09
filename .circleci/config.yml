@@ -1,19 +1,54 @@
-version: '2.1'
+version: 2.1
 
 orbs:
-  codecov: codecov/codecov@3.2.2
-  node: circleci/node@4.7.0
-
+  windows: circleci/windows@2.2.0
 
 jobs:
-  example-job:
-    docker:
-      - image: windows-server-2019-nvidia:stable
+  test:
+    description: Setup and run application tests
+    executor:
+      name: windows/default
     steps:
-      - codecov/upload:
-          token: 'e1abd556-215f-4e20-94f8-db37fa7f0cb5' 
-
+      - checkout
+      - restore_cache:
+          keys:
+            - dotnet-packages-v1-{{ checksum "src/AthenaBackend.WebApi/AthenaBackend.WebApi.csproj" }}
+            - dotnet-packages-v1-{{ checksum "src/AthenaBackend.Domain/AthenaBackend.Domain.csproj" }}
+            - dotnet-packages-v1-{{ checksum "src/AthenaBackend.Infrastructure/AthenaBackend.Infrastructure.csproj" }}
+            - dotnet-packages-v1-{{ checksum "src/AthenaBackend.Application/AthenaBackend.Application.csproj" }}
+            - dotnet-packages-v1-{{ checksum "src/AthenaBackend.Application/AthenaBackend.Application.csproj" }}
+      - run:
+          name: "Install project dependencies"
+          command: dotnet.exe restore
+      - save_cache:
+          paths:
+            - C:\Users\circleci\.nuget\packages
+          key: dotnet-packages-v1-{{ checksum "src/AthenaBackend.WebApi/AthenaBackend.WebApi.csproj" }}
+          key: dotnet-packages-v1-{{ checksum "src/AthenaBackend.Domain/AthenaBackend.Domain.csproj" }}
+          key: dotnet-packages-v1-{{ checksum "src/AthenaBackend.Infrastructure/AthenaBackend.Infrastructure.csproj" }}
+          key: dotnet-packages-v1-{{ checksum "src/AthenaBackend.Application/AthenaBackend.Application.csproj" }}
+          key: dotnet-packages-v1-{{ checksum "src/AthenaBackend.Application/AthenaBackend.Application.csproj" }}
+      - run:
+          name: "Run Application Tests"
+          command: dotnet.exe test -v n --results-directory:test_coverage --collect:"Code Coverage"
+      - run:
+          name: "Print Working Directory"
+          command: pwd
+      - store_artifacts:
+          path: C:\Users\circleci\project\test_coverage
+  build:
+    description: Build application with Release configuration
+    executor:
+      name: windows/default
+    steps:
+      - checkout
+      - run:
+          name: "Build Application according to some given configuration"
+          command: dotnet.exe build --configuration Release
 workflows:
-  example-workflow:
+  test_and_build:
     jobs:
-      - example-job
+      - test
+      - build:
+          requires:
+            - test
