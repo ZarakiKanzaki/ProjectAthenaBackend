@@ -36,12 +36,20 @@ jobs:
           name: "generate report"
           command: reportgenerator -reports:test\test_coverage\**\coverage.cobertura.xml -targetdir:test\test_coverage -reporttypes:Cobertura
       - run:
+          name: "Generate Test results"
+          when: always
+          command: |
+              dotnet tool install -g trx2junit
+              export PATH="$PATH:/root/.dotnet/tools"
+              trx2junit test/**/TestResults/*.trx
+      - run:
           name: "Print Working Directory"
           command: pwd
       - store_artifacts:
           path: C:\Users\circleci\project\test\test_coverage
       - store_test_results:
           path: C:\Users\circleci\project\test\test_coverage
+           
       - codecov/upload:
           file: C:\Users\circleci\project\test\test_coverage\Cobertura.xml 
           #flags: unittests
