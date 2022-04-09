@@ -16,7 +16,7 @@ jobs:
             - dotnet-packages-v1-{{ checksum "src/AthenaBackend.Domain/AthenaBackend.Domain.csproj" }}
             - dotnet-packages-v1-{{ checksum "src/AthenaBackend.Infrastructure/AthenaBackend.Infrastructure.csproj" }}
             - dotnet-packages-v1-{{ checksum "src/AthenaBackend.Application/AthenaBackend.Application.csproj" }}
-            - dotnet-packages-v1-{{ checksum "src/AthenaBackend.Application/AthenaBackend.Application.csproj" }}
+            - dotnet-packages-v1-{{ checksum "src/AthenaBackend.Common/AthenaBackend.Common.csproj" }}
       - run:
           name: "Install project dependencies"
           command: dotnet.exe restore
@@ -24,10 +24,22 @@ jobs:
           paths:
             - C:\Users\circleci\.nuget\packages
           key: dotnet-packages-v1-{{ checksum "src/AthenaBackend.WebApi/AthenaBackend.WebApi.csproj" }}
+      - save_cache:
+          paths:
+            - C:\Users\circleci\.nuget\packages
           key: dotnet-packages-v1-{{ checksum "src/AthenaBackend.Domain/AthenaBackend.Domain.csproj" }}
+      - save_cache:
+          paths:
+            - C:\Users\circleci\.nuget\packages
           key: dotnet-packages-v1-{{ checksum "src/AthenaBackend.Infrastructure/AthenaBackend.Infrastructure.csproj" }}
+      - save_cache:
+          paths:
+            - C:\Users\circleci\.nuget\packages
           key: dotnet-packages-v1-{{ checksum "src/AthenaBackend.Application/AthenaBackend.Application.csproj" }}
-          key: dotnet-packages-v1-{{ checksum "src/AthenaBackend.Application/AthenaBackend.Application.csproj" }}
+      - save_cache:
+          paths:
+            - C:\Users\circleci\.nuget\packages
+          key: dotnet-packages-v1-{{ checksum "src/AthenaBackend.Common/AthenaBackend.Common.csproj" }}
       - run:
           name: "Run Application Tests"
           command: dotnet.exe test -v n --results-directory:test_coverage --collect:"Code Coverage"
