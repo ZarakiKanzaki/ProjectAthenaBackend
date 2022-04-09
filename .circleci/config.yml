@@ -18,24 +18,22 @@ jobs:
       
       - run:
           name: "Run Common Tests"
-          command: dotnet.exe test test/AthenaBackend.CommonTest/AthenaBackend.CommonTest.csproj  -v n --results-directory:test\test_coverage --collect:"Code Coverage"
+          command: dotnet.exe test test/AthenaBackend.CommonTest/AthenaBackend.CommonTest.csproj  -v n --results-directory:test\test_coverage --collect:"XPlat Code Coverage"
       - run:
           name: "Run Domain Tests"
-          command: dotnet.exe test test/AthenaBackend.DomainTest/AthenaBackend.DomainTest.csproj  -v n --results-directory:test\test_coverage --collect:"Code Coverage"
+          command: dotnet.exe test test/AthenaBackend.DomainTest/AthenaBackend.DomainTest.csproj  -v n --results-directory:test\test_coverage --collect:"XPlat Code Coverage"
       - run:
           name: "Run Infrastructure Tests"
-          command: dotnet.exe test test/AthenaBackend.InfrastructureTest/AthenaBackend.InfrastructureTest.csproj  -v n --results-directory:test\test_coverage --collect:"Code Coverage"
+          command: dotnet.exe test test/AthenaBackend.InfrastructureTest/AthenaBackend.InfrastructureTest.csproj  -v n --results-directory:test\test_coverage --collect:"XPlat Code Coverage"
       - run:
           name: "Run Application Tests"
-          command: dotnet.exe test test/AthenaBackend.ApplicationTest/AthenaBackend.ApplicationTest.csproj  -v n --results-directory:test\test_coverage --collect:"Code Coverage"
+          command: dotnet.exe test test/AthenaBackend.ApplicationTest/AthenaBackend.ApplicationTest.csproj  -v n --results-directory:test\test_coverage --collect:"XPlat Code Coverage"
       
       - run:
           name: "Print Working Directory"
           command: pwd
-      - store_artifacts:
-          path: C:\Users\circleci\project\test_coverage
       - store_test_results:
-          path: C:\Users\circleci\project\test_coverage
+          path: C:\Users\circleci\project\test\test_coverage
   build:
     description: Build application with Release configuration
     executor:
