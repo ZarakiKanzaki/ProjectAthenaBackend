@@ -44,7 +44,7 @@ jobs:
           path: C:\Users\circleci\project\test\test_coverage
       - codecov/upload:
           file: C:\Users\circleci\project\test\test_coverage\Cobertura.xml 
-          #flags: unittests
+          flags: unittests
   build:
     description: Build application with Release configuration
     executor:
