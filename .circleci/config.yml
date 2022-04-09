@@ -69,7 +69,7 @@ jobs:
       
       - run:
           name: "Run Common Tests"
-          command: dotnet.exe test ../test/AthenaBackend.CommonTest/AthenaBackend.CommonTest.csproj  -v n --results-directory:test\test_coverage --collect:"Code Coverage"
+          command: dotnet.exe test test/AthenaBackend.CommonTest/AthenaBackend.CommonTest.csproj  -v n --results-directory:test\test_coverage --collect:"Code Coverage"
       - run:
           name: "Run Domain Tests"
           command: dotnet.exe test test/AthenaBackend.DomainTest/AthenaBackend.DomainTest.csproj  -v n --results-directory:test\test_coverage --collect:"Code Coverage"
