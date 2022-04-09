@@ -61,7 +61,11 @@ jobs:
           paths:
             - C:\Users\circleci\.nuget\packages
           key: dotnet-packages-v1-{{ checksum "test/AthenaBackend.InfrastructureTest/AthenaBackend.InfrastructureTest.csproj" }}
-     
+      
+      - run:
+          name: "Print Working Directory"
+          command: pwd
+      
       - run:
           name: "Run Common Tests"
           command: dotnet.exe test ../test/AthenaBackend.CommonTest/AthenaBackend.CommonTest.csproj  -v n --results-directory:test\test_coverage --collect:"Code Coverage"
