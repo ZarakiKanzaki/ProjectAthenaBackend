@@ -51,9 +51,10 @@ jobs:
       - run:
           name: "Download Codecov Uploader"
           command: |
-            $ProgressPreference = 'SilentlyContinue'
-            Invoke-WebRequest -Uri https://uploader.codecov.io/latest/windows/codecov.exe -Outfile codecov.exe
-            .\codecov.exe
+                $ProgressPreference = 'SilentlyContinue'
+                Invoke-WebRequest -Uri https://uploader.codecov.io/latest/windows/codecov.exe 
+                -Outfile codecov.exe
+                .\codecov.exe -t ${CODECOV_TOKEN}
 
   build:
     description: Build application with Release configuration
