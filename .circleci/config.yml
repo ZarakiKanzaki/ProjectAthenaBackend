@@ -56,7 +56,7 @@ jobs:
       - checkout
       - run:
           name: "Build Application according to some given configuration"
-          command: dotnet.exe build --configuration Release
+          command: dotnet.exe build "src/AthenaBackend.WebApi/AthenaBackend.WebApi.csproj" --configuration Release
 workflows:
   test_and_build:
     jobs:
