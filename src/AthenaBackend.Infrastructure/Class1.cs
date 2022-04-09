@@ -1,7 +1,8 @@
-﻿namespace AthenaBackend.Infrastructure
+﻿using System;
+
+namespace AthenaBackend.Infrastructure
 {
     public class Class1
     {
-
     }
 }

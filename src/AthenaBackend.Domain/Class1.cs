@@ -1,7 +1,8 @@
-﻿namespace AthenaBackend.Domain
+﻿using System;
+
+namespace AthenaBackend.Domain
 {
     public class Class1
     {
-
     }
 }
