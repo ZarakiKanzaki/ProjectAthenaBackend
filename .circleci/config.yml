@@ -40,7 +40,7 @@ jobs:
           when: always
           command: |
               dotnet tool install -g trx2junit
-              trx2junit test/**/TestResults/*.trx
+              trx2junit test/test_coverage/*.trx
       - run:
           name: "Print Working Directory"
           command: pwd
