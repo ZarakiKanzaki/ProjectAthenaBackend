@@ -6,7 +6,6 @@ orbs:
 jobs:
   test:
     description: Setup and run application tests
-    working_directory: ~/test
     executor:
       name: windows/default
     steps:
@@ -24,7 +23,7 @@ jobs:
             - dotnet-packages-v1-{{ checksum "test/AthenaBackend.InfrastructureTest/AthenaBackend.InfrastructureTest.csproj" }}
       - run:
           name: "Install project dependencies"
-          command: dotnet.exe restore
+          command: dotnet.exe restore ~/src/AthenaBackend.WebApi/AthenaBackend.WebApi.csproj
 
       - save_cache:
           paths:
@@ -62,30 +61,29 @@ jobs:
           paths:
             - C:\Users\circleci\.nuget\packages
           key: dotnet-packages-v1-{{ checksum "test/AthenaBackend.InfrastructureTest/AthenaBackend.InfrastructureTest.csproj" }}
-      - run: |
-           pwd  
-      # - run:
-      #     name: "Print Working Directory"
-      #     command: pwd
+
+      - run:
+          name: "Print Working Directory"
+          command: pwd
       
-      # - run:
-      #     name: "Run Common Tests"
-      #     command: dotnet.exe test ~/AthenaBackend.CommonTest/AthenaBackend.CommonTest.csproj  -v n --results-directory:test\test_coverage --collect:"Code Coverage"
-      # - run:
-      #     name: "Run Domain Tests"
-      #     command: dotnet.exe test ~/AthenaBackend.DomainTest/AthenaBackend.DomainTest.csproj  -v n --results-directory:test\test_coverage --collect:"Code Coverage"
-      # - run:
-      #     name: "Run Infrastructure Tests"
-      #     command: dotnet.exe test ~/AthenaBackend.InfrastructureTest/AthenaBackend.InfrastructureTest.csproj  -v n --results-directory:test\test_coverage --collect:"Code Coverage"
-      # - run:
-      #     name: "Run Application Tests"
-      #     command: dotnet.exe test ~/AthenaBackend.ApplicationTest/AthenaBackend.ApplicationTest.csproj  -v n --results-directory:test\test_coverage --collect:"Code Coverage"
+      - run:
+          name: "Run Common Tests"
+          command: dotnet.exe test test/AthenaBackend.CommonTest/AthenaBackend.CommonTest.csproj  -v n --results-directory:test\test_coverage --collect:"Code Coverage"
+      - run:
+          name: "Run Domain Tests"
+          command: dotnet.exe test test/AthenaBackend.DomainTest/AthenaBackend.DomainTest.csproj  -v n --results-directory:test\test_coverage --collect:"Code Coverage"
+      - run:
+          name: "Run Infrastructure Tests"
+          command: dotnet.exe test test/AthenaBackend.InfrastructureTest/AthenaBackend.InfrastructureTest.csproj  -v n --results-directory:test\test_coverage --collect:"Code Coverage"
+      - run:
+          name: "Run Application Tests"
+          command: dotnet.exe test test/AthenaBackend.ApplicationTest/AthenaBackend.ApplicationTest.csproj  -v n --results-directory:test\test_coverage --collect:"Code Coverage"
       
-      # - run:
-      #     name: "Print Working Directory"
-      #     command: pwd
-      # - store_artifacts:
-      #     path: C:\Users\circleci\project\test_coverage
+      - run:
+          name: "Print Working Directory"
+          command: pwd
+      - store_artifacts:
+          path: C:\Users\circleci\project\test_coverage
   build:
     description: Build application with Release configuration
     executor:
@@ -99,6 +97,6 @@ workflows:
   test_and_build:
     jobs:
       - test
-      # - build:
-      #     requires:
-      #       - test
+       - build:
+           requires:
+             - test
