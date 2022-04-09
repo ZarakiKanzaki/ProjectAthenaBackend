@@ -6,6 +6,7 @@ orbs:
 jobs:
   test:
     description: Setup and run application tests
+    working_directory: ~/ProjectAthenaBackend
     executor:
       name: windows/default
     steps:
