@@ -1,0 +1,73 @@
+version: 2.1
+
+orbs:
+  windows: circleci/windows@4.1.1
+
+jobs:
+  test:
+    description: Setup and run application tests
+    executor:
+      name: windows/default
+    steps:
+      - checkout
+
+      - run:
+          name: "Install project dependencies"
+          command: dotnet.exe restore src/AthenaBackend.WebApi/AthenaBackend.WebApi.csproj
+
+      
+      - run:
+          name: "Run Common Tests"
+          command: dotnet.exe test test/AthenaBackend.CommonTest/AthenaBackend.CommonTest.csproj  -v n --results-directory:test\test_coverage --collect:"XPlat Code Coverage" --logger "trx"
+      - run:
+          name: "Run Domain Tests"
+          command: dotnet.exe test test/AthenaBackend.DomainTest/AthenaBackend.DomainTest.csproj  -v n --results-directory:test\test_coverage --collect:"XPlat Code Coverage" --logger "trx"
+      - run:
+          name: "Run Infrastructure Tests"
+          command: dotnet.exe test test/AthenaBackend.InfrastructureTest/AthenaBackend.InfrastructureTest.csproj  -v n --results-directory:test\test_coverage --collect:"XPlat Code Coverage" --logger "trx"
+      - run:
+          name: "Run Application Tests"
+          command: dotnet.exe test test/AthenaBackend.ApplicationTest/AthenaBackend.ApplicationTest.csproj  -v n --results-directory:test\test_coverage --collect:"XPlat Code Coverage" --logger "trx"
+      - run:
+          name: "Install Report generator"
+          command: dotnet.exe tool install --global dotnet-reportgenerator-globaltool 
+      - run:
+          name: "generate report"
+          command: reportgenerator -reports:test\test_coverage\**\coverage.cobertura.xml -targetdir:test\test_coverage -reporttypes:Cobertura
+      - run:
+          name: "Generate Test results"
+          when: always
+          command: |
+              dotnet tool install -g trx2junit
+              trx2junit test/test_coverage/*.trx
+      - run:
+          name: "Print Working Directory"
+          command: pwd
+      - store_artifacts:
+          path: C:\Users\circleci\project\test\test_coverage
+      - store_test_results:
+          path: C:\Users\circleci\project\test\test_coverage
+      
+      - run:
+          name: "Download Codecov Uploader"
+          command: |
+            $ProgressPreference = 'SilentlyContinue'
+            Invoke-WebRequest -Uri https://uploader.codecov.io/latest/windows/codecov.exe -Outfile codecov.exe
+            .\codecov.exe
+
+  build:
+    description: Build application with Release configuration
+    executor:
+      name: windows/default
+    steps:
+      - checkout
+      - run:
+          name: "Build Application according to some given configuration"
+          command: dotnet.exe build "src/AthenaBackend.WebApi/AthenaBackend.WebApi.csproj" --configuration Release
+workflows:
+  test_and_build:
+    jobs:
+      - test
+      - build:
+          requires:
+            - test
