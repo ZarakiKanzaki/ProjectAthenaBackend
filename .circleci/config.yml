@@ -10,61 +10,11 @@ jobs:
       name: windows/default
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - dotnet-packages-v1-{{ checksum "src/AthenaBackend.WebApi/AthenaBackend.WebApi.csproj" }}
-            - dotnet-packages-v1-{{ checksum "src/AthenaBackend.Domain/AthenaBackend.Domain.csproj" }}
-            - dotnet-packages-v1-{{ checksum "src/AthenaBackend.Infrastructure/AthenaBackend.Infrastructure.csproj" }}
-            - dotnet-packages-v1-{{ checksum "src/AthenaBackend.Application/AthenaBackend.Application.csproj" }}
-            - dotnet-packages-v1-{{ checksum "src/AthenaBackend.Common/AthenaBackend.Common.csproj" }}
-            - dotnet-packages-v1-{{ checksum "test/AthenaBackend.DomainTest/AthenaBackend.DomainTest.csproj" }}
-            - dotnet-packages-v1-{{ checksum "test/AthenaBackend.ApplicationTest/AthenaBackend.ApplicationTest.csproj" }}
-            - dotnet-packages-v1-{{ checksum "test/AthenaBackend.CommonTest/AthenaBackend.CommonTest.csproj" }}
-            - dotnet-packages-v1-{{ checksum "test/AthenaBackend.InfrastructureTest/AthenaBackend.InfrastructureTest.csproj" }}
+
       - run:
           name: "Install project dependencies"
           command: dotnet.exe restore src/AthenaBackend.WebApi/AthenaBackend.WebApi.csproj
 
-      - save_cache:
-          paths:
-            - C:\Users\circleci\.nuget\packages
-          key: dotnet-packages-v1-{{ checksum "src/AthenaBackend.WebApi/AthenaBackend.WebApi.csproj" }}
-      - save_cache:
-          paths:
-            - C:\Users\circleci\.nuget\packages
-          key: dotnet-packages-v1-{{ checksum "src/AthenaBackend.Domain/AthenaBackend.Domain.csproj" }}
-      - save_cache:
-          paths:
-            - C:\Users\circleci\.nuget\packages
-          key: dotnet-packages-v1-{{ checksum "src/AthenaBackend.Infrastructure/AthenaBackend.Infrastructure.csproj" }}
-      - save_cache:
-          paths:
-            - C:\Users\circleci\.nuget\packages
-          key: dotnet-packages-v1-{{ checksum "src/AthenaBackend.Application/AthenaBackend.Application.csproj" }}
-      - save_cache:
-          paths:
-            - C:\Users\circleci\.nuget\packages
-          key: dotnet-packages-v1-{{ checksum "src/AthenaBackend.Common/AthenaBackend.Common.csproj" }}
-      - save_cache:
-          paths:
-            - C:\Users\circleci\.nuget\packages
-          key: dotnet-packages-v1-{{ checksum "test/AthenaBackend.DomainTest/AthenaBackend.DomainTest.csproj" }}
-      - save_cache:
-          paths:
-            - C:\Users\circleci\.nuget\packages
-          key: dotnet-packages-v1-{{ checksum "test/AthenaBackend.ApplicationTest/AthenaBackend.ApplicationTest.csproj" }}
-      - save_cache:
-          paths:
-            - C:\Users\circleci\.nuget\packages
-          key: dotnet-packages-v1-{{ checksum "test/AthenaBackend.CommonTest/AthenaBackend.CommonTest.csproj" }}
-      - save_cache:
-          paths:
-            - C:\Users\circleci\.nuget\packages
-          key: dotnet-packages-v1-{{ checksum "test/AthenaBackend.InfrastructureTest/AthenaBackend.InfrastructureTest.csproj" }}
-
-      - run:
-          name: "Print Working Directory"
-          command: pwd
       
       - run:
           name: "Run Common Tests"
@@ -83,6 +33,8 @@ jobs:
           name: "Print Working Directory"
           command: pwd
       - store_artifacts:
+          path: C:\Users\circleci\project\test_coverage
+      - store_test_results:
           path: C:\Users\circleci\project\test_coverage
   build:
     description: Build application with Release configuration
