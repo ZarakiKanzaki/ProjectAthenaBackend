@@ -28,12 +28,17 @@ jobs:
       - run:
           name: "Run Application Tests"
           command: dotnet.exe test test/AthenaBackend.ApplicationTest/AthenaBackend.ApplicationTest.csproj  -v n --results-directory:test\test_coverage --collect:"XPlat Code Coverage"
-      
+      - run:
+          name: "Install Report generator"
+          command: dotnet.exe tool install --global dotnet-reportgenerator-globaltool 
+      - run:
+          name: "generate report"
+          command: reportgenerator -reports:test\test_coverage\**\coveragel.cobertura.xml -targetdir:test\test_coverage -reporttypes:Cobertura
       - run:
           name: "Print Working Directory"
           command: pwd
       - store_test_results:
-          path: C:\Users\circleci\project\test\test_coverage\*\*.xml
+          path: C:\Users\circleci\project\test\test_coverage
   build:
     description: Build application with Release configuration
     executor:
