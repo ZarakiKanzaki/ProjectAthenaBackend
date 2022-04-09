@@ -63,7 +63,7 @@ jobs:
             - C:\Users\circleci\.nuget\packages
           key: dotnet-packages-v1-{{ checksum "test/AthenaBackend.InfrastructureTest/AthenaBackend.InfrastructureTest.csproj" }}
       - run: |
-	        pwd  
+           pwd  
       # - run:
       #     name: "Print Working Directory"
       #     command: pwd
