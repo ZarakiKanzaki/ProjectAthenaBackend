@@ -2,7 +2,8 @@ version: 2.1
 
 orbs:
   windows: circleci/windows@2.2.0
-
+  codecov: codecov/codecov@3.0.0
+  
 jobs:
   test:
     description: Setup and run application tests
@@ -41,6 +42,9 @@ jobs:
           path: C:\Users\circleci\project\test\test_coverage
       - store_test_results:
           path: C:\Users\circleci\project\test\test_coverage
+      - codecov/upload:
+          file: C:\Users\circleci\project\test\test_coverage\Cobertura.xml 
+
   build:
     description: Build application with Release configuration
     executor:
