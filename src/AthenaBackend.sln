@@ -23,7 +23,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AthenaBackend.ApplicationTe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AthenaBackend.InfrastructureTest", "..\test\AthenaBackend.InfrastructureTest\AthenaBackend.InfrastructureTest.csproj", "{EA9191C1-AA5D-4FB5-9EE3-0ED9AEE9C82A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AthenaBackend.CommonTest", "AthenaBackend.CommonTest\AthenaBackend.CommonTest.csproj", "{A7A589CA-333D-436A-8EE3-3F91D281BE57}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AthenaBackend.CommonTest", "..\test\AthenaBackend.CommonTest\AthenaBackend.CommonTest.csproj", "{A7A589CA-333D-436A-8EE3-3F91D281BE57}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
