@@ -1,3 +1,4 @@
+using AthenaBackend.Application;
 using AthenaBackend.WebApi.DataApplicationRequest;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -19,6 +20,8 @@ namespace AthenaBackend.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddApplication();
+
             services.AddGraphQLServer()
                     .AddQueryType<Query>();
         }

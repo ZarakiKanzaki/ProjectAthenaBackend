@@ -38,7 +38,7 @@ namespace AthenaBackend.Common.DomainDrivenDesign
             => Events?.IsThereAnyAsyncEventToDispatch
             ?? false;
 
-        public bool IsThereDispatchedEventsAsync
+        public bool IsThereAnyAsyncDispatchedEvents
             => Events?.IsThereAnyAsyncDispatchedEvents
             ?? false;
 

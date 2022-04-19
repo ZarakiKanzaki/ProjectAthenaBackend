@@ -19,6 +19,7 @@ namespace AthenaBackend.CommonTest
             var animal = new Animal();
             animal.IsThereAnySyncEventToDispatch.ShouldBeTrue();
             animal.SyncEventsToDispatch.Any(a => a.DomainEvent is AnimalCreatedEvent).ShouldBeTrue();
+            animal.IsThereAnyAsyncDispatchedEvents.ShouldBeFalse();
         }
 
         [Test]
@@ -30,10 +31,17 @@ namespace AthenaBackend.CommonTest
         }
 
         [Test]
+        public void AggregateRaiseEvent_EventAsyncAndEventNull_ShouldBeProcessed()
+        {
+            var animal = Animal.Create(new AnimalCreatedEventAsync(Guid.NewGuid()), null);
+            animal.IsThereAnyAsyncEventToDispatch.ShouldBeTrue();
+            animal.AsyncEventsToDispatch.Any(a => a.DomainEvent is AnimalCreatedEventAsync).ShouldBeTrue();
+        }
+
+        [Test]
         public void AggregateRaiseEvent_NullEventAsync_ShouldThrowException()
         {
             var exception = Should.Throw<NullReferenceException>(() => new Animal().RaiseEvent(null));
-
         }
     }
 
@@ -49,6 +57,15 @@ namespace AthenaBackend.CommonTest
         public static Animal Create(AnimalCreatedEventAsync _event)
         {
             var animalCreated = new Animal();
+            animalCreated.RaiseEvent(_event);
+
+            return animalCreated;
+        }
+
+        public static Animal Create(AnimalCreatedEventAsync _event, DomainEventsCollection events)
+        {
+            var animalCreated = new Animal();
+            animalCreated.Events = events;
             animalCreated.RaiseEvent(_event);
 
             return animalCreated;
