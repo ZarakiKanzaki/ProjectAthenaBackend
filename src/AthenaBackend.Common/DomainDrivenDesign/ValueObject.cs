@@ -6,7 +6,7 @@ namespace AthenaBackend.Common.DomainDrivenDesign
 {
     public abstract class ValueObject
     {
-        protected static bool EqualOperator(ValueObject left, ValueObject right)
+        public static bool operator ==(ValueObject left, ValueObject right)
         {
             if (left is null ^ right is null)
             {
@@ -16,10 +16,7 @@ namespace AthenaBackend.Common.DomainDrivenDesign
             return left?.Equals(right) != false;
         }
 
-        protected static bool NotEqualOperator(ValueObject left, ValueObject right)
-        {
-            return EqualOperator(left, right) == false;
-        }
+        public static bool operator !=(ValueObject left, ValueObject right) => left == right == false;
 
         protected abstract IEnumerable<object> GetAtomicValues();
 

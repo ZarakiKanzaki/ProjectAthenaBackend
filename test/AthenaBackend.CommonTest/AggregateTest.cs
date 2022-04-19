@@ -65,7 +65,7 @@ namespace AthenaBackend.CommonTest
         public void UpdateNewlyAggregate_wUserId_CrudOperationShouldUpdate()
         {
             var animal = new Animal(Guid.NewGuid());
-            
+
             animal.Update(Guid.NewGuid());
             animal.CrudOperationLog.ShouldNotBeNull();
             animal.CrudOperationLog.Update.ShouldNotBeNull();

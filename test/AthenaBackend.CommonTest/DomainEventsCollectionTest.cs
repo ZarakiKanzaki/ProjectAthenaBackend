@@ -64,7 +64,7 @@ namespace AthenaBackend.CommonTest
             var theEvent = new InternalDomainEvent(1);
 
             events.Raise(theEvent);
-            Should.Throw<InvalidOperationException>(()=> events.MarkEventAsDispatchedSync(theEvent.Id));
+            Should.Throw<InvalidOperationException>(() => events.MarkEventAsDispatchedSync(theEvent.Id));
         }
 
 

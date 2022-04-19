@@ -8,7 +8,7 @@ namespace AthenaBackend.Common.DomainDrivenDesign
         public OperationLog(Guid? userOperationId)
         {
             UserOperationId = userOperationId;
-            UserOperationDateTime = DateTime.UtcNow;   
+            UserOperationDateTime = DateTime.UtcNow;
         }
 
         public Guid? UserOperationId { get; private set; }

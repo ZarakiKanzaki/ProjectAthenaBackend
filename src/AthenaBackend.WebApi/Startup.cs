@@ -1,4 +1,5 @@
 using AthenaBackend.Application;
+using AthenaBackend.Infrastructure;
 using AthenaBackend.WebApi.DataApplicationRequest;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -21,6 +22,7 @@ namespace AthenaBackend.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddApplication();
+            services.AddInfrastructure(Configuration);
 
             services.AddGraphQLServer()
                     .AddQueryType<Query>();

@@ -16,10 +16,11 @@ namespace AthenaBackend.Common.DomainDrivenDesign
 
         public virtual byte[] Version { get; protected set; }
         public virtual CrudOperationLog CrudOperationLog { get; protected set; }
-        protected internal void CreateOperationLog(Guid userCreatedId) => CrudOperationLog = new CrudOperationLog(userCreatedId);
-        protected internal void UpdateOperationLog(Guid userUpdatedId) 
+        protected internal void CreateOperationLog(Guid userCreatedId)
+            => CrudOperationLog = new CrudOperationLog(userCreatedId);
+        protected internal void UpdateOperationLog(Guid userUpdatedId)
             => CrudOperationLog = CrudOperationLog.UpdateOperation(userUpdatedId);
-        protected internal void DeleteOperationLog(Guid userDeletedId) 
+        protected internal void DeleteOperationLog(Guid userDeletedId)
             => CrudOperationLog = CrudOperationLog.DeleteOperation(userDeletedId);
 
     }
