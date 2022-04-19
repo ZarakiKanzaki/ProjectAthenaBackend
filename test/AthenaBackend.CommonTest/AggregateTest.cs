@@ -43,6 +43,63 @@ namespace AthenaBackend.CommonTest
         {
             var exception = Should.Throw<NullReferenceException>(() => new Animal().RaiseEvent(null));
         }
+
+        [Test]
+        public void InitializeNewAggregate_NoUserId_CrudOperationShoudBeNull()
+        {
+            var animal = new Animal();
+            animal.CrudOperationLog.ShouldBeNull();
+        }
+
+        [Test]
+        public void InitializeNewAggregate_wUserId_CrudOperationShoudNotBeNull()
+        {
+            var animal = new Animal(Guid.NewGuid());
+            animal.CrudOperationLog.ShouldNotBeNull();
+            animal.CrudOperationLog.Creation.ShouldNotBeNull();
+            animal.CrudOperationLog.Update.ShouldBeNull();
+            animal.CrudOperationLog.Deletion.ShouldBeNull();
+        }
+
+        [Test]
+        public void UpdateNewlyAggregate_wUserId_CrudOperationShouldUpdate()
+        {
+            var animal = new Animal(Guid.NewGuid());
+            
+            animal.Update(Guid.NewGuid());
+            animal.CrudOperationLog.ShouldNotBeNull();
+            animal.CrudOperationLog.Update.ShouldNotBeNull();
+            animal.CrudOperationLog.Creation.ShouldNotBeNull();
+            animal.CrudOperationLog.Deletion.ShouldBeNull();
+        }
+
+        [Test]
+        public void DeleteAggregate_WithUpdate_CrudOperationShouldUpdate()
+        {
+            var animal = new Animal(Guid.NewGuid());
+            animal.Update(Guid.NewGuid());
+            animal.Delete(Guid.NewGuid());
+
+            animal.CrudOperationLog.ShouldNotBeNull();
+            animal.CrudOperationLog.Update.ShouldNotBeNull();
+            animal.CrudOperationLog.Creation.ShouldNotBeNull();
+            animal.CrudOperationLog.Deletion.ShouldNotBeNull();
+            animal.CrudOperationLog.Update.ShouldNotBeSameAs(animal.CrudOperationLog.Deletion);
+        }
+
+        [Test]
+        public void DeleteAggregate_WithoutUpdate_CrudOperationShouldUpdate()
+        {
+            var animal = new Animal(Guid.NewGuid());
+            animal.Delete(Guid.NewGuid());
+
+            animal.CrudOperationLog.ShouldNotBeNull();
+            animal.CrudOperationLog.Update.ShouldNotBeNull();
+            animal.CrudOperationLog.Creation.ShouldNotBeNull();
+            animal.CrudOperationLog.Deletion.ShouldNotBeNull();
+            animal.CrudOperationLog.Update.ShouldBeSameAs(animal.CrudOperationLog.Deletion);
+        }
+
     }
 
     internal class Animal : Aggregate<Guid>
@@ -54,21 +111,40 @@ namespace AthenaBackend.CommonTest
             RaiseEvent(new AnimalCreatedEvent(this.Id));
         }
 
+        public Animal(Guid guid) : base(guid)
+        {
+        }
+
         public static Animal Create(AnimalCreatedEventAsync _event)
         {
             var animalCreated = new Animal();
+            animalCreated.CreateOperationLog(Guid.NewGuid());
             animalCreated.RaiseEvent(_event);
 
             return animalCreated;
         }
 
-        public static Animal Create(AnimalCreatedEventAsync _event, DomainEventsCollection events)
+        protected internal static Animal Create(AnimalCreatedEventAsync _event, DomainEventsCollection events)
         {
-            var animalCreated = new Animal();
-            animalCreated.Events = events;
+            var animalCreated = new Animal
+            {
+                Events = events
+            };
+            animalCreated.CreateOperationLog(Guid.NewGuid());
             animalCreated.RaiseEvent(_event);
 
             return animalCreated;
+        }
+
+        protected internal void Update(Guid guid)
+        {
+            UpdateOperationLog(guid);
+        }
+
+        protected internal void Delete(Guid guid)
+        {
+            IsDeleted = true;
+            DeleteOperationLog(guid);
         }
     }
 

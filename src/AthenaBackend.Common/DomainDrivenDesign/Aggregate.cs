@@ -1,18 +1,32 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace AthenaBackend.Common.DomainDrivenDesign
 {
     public abstract class Aggregate<TKey> : Aggregate where TKey : struct
     {
+        protected Aggregate(Guid userCreatedId) => CreateOperationLog(userCreatedId);
+
+        protected Aggregate()
+        {
+        }
+
         public virtual TKey Id { get; protected set; }
 
         public virtual byte[] Version { get; protected set; }
+        public virtual CrudOperationLog CrudOperationLog { get; protected set; }
+        protected internal void CreateOperationLog(Guid userCreatedId) => CrudOperationLog = new CrudOperationLog(userCreatedId);
+        protected internal void UpdateOperationLog(Guid userUpdatedId) 
+            => CrudOperationLog = CrudOperationLog.UpdateOperation(userUpdatedId);
+        protected internal void DeleteOperationLog(Guid userDeletedId) 
+            => CrudOperationLog = CrudOperationLog.DeleteOperation(userDeletedId);
+
     }
 
     public abstract class Aggregate : Entity
     {
-        public Aggregate() => Events = new DomainEventsCollection();
+        public Aggregate() : base() => Events = new DomainEventsCollection();
 
         public virtual DomainEventsCollection Events { get; protected set; }
 
