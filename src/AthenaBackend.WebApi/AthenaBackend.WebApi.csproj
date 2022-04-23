@@ -18,6 +18,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AthenaBackend.Application\AthenaBackend.Application.csproj" />
+    <ProjectReference Include="..\AthenaBackend.Common\AthenaBackend.Common.csproj" />
+    <ProjectReference Include="..\AthenaBackend.Domain\AthenaBackend.Domain.csproj" />
     <ProjectReference Include="..\AthenaBackend.Infrastructure\AthenaBackend.Infrastructure.csproj" />
   </ItemGroup>
 

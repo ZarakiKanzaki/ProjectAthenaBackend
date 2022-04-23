@@ -1,10 +1,9 @@
 ﻿using AthenaBackend.Common.DomainDrivenDesign;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
-using Microsoft.Extensions.DependencyInjection;
 using System.Linq;
 using System.Reflection;
-using AthenaBackend.Common.Converters;
 
 namespace AthenaBackend.Common.DependecyInjection
 {

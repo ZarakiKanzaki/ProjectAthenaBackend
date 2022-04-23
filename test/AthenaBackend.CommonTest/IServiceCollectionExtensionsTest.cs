@@ -12,7 +12,7 @@ namespace AthenaBackend.CommonTest
     public class IServiceCollectionExtensionsTest
     {
         Assembly currentAssembly;
-        
+
         [SetUp]
         public void Setup()
         {
@@ -110,12 +110,64 @@ namespace AthenaBackend.CommonTest
     class FakeRepositoryOfT1 : IFakeRepositoryOfT1
     {
         public Task Add(FakeAggregate entity) => Task.CompletedTask;
+
+        public Task<FakeAggregate> FindByCode(string code)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<FakeAggregate> FindByKey(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<FakeAggregate> GetByCode(string code)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<FakeAggregate> GetByKey(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<bool> IsUniqueByCode(string code)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public Task SaveChanges() => Task.CompletedTask;
     }
     interface IFakeRepositoryOfT2 : IRepository<FakeAggregate, int> { }
     class FakeRepositoryOfT2 : IFakeRepositoryOfT2
     {
         public Task Add(FakeAggregate entity) => Task.CompletedTask;
+
+        public Task<FakeAggregate> FindByCode(string code)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<FakeAggregate> FindByKey(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<FakeAggregate> GetByCode(string code)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<FakeAggregate> GetByKey(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<bool> IsUniqueByCode(string code)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public Task SaveChanges() => Task.CompletedTask;
     }
     class FakeAggregate : Aggregate<int> { }

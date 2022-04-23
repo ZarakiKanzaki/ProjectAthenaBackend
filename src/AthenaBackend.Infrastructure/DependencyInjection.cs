@@ -1,7 +1,7 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.EntityFrameworkCore;
 
 
 namespace AthenaBackend.Infrastructure
@@ -11,7 +11,7 @@ namespace AthenaBackend.Infrastructure
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             var connectionString = configuration.GetConnectionString("default");
-         
+
             services.AddPooledDbContextFactory<ReadDbContext>(
                             (s, o) => o.UseSqlite(connectionString)
                                         .UseLoggerFactory(s.GetRequiredService<ILoggerFactory>()));
