@@ -12,7 +12,8 @@ using NUnit.Framework;
 using Shouldly;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
+using System;
+using System.Linq;
 
 namespace AthenaBackend.InfrastructureTest.WriteModel.Core.Themebooks
 {
@@ -44,13 +45,15 @@ namespace AthenaBackend.InfrastructureTest.WriteModel.Core.Themebooks
 
             var themebooks = new List<Themebook>()
             {
-                await themebookServiceMock.Create(GetValidDtoBuilder().WithName($"{ThemebookDtoDefaultValues.name}-{1}").Build()),
-                await themebookServiceMock.Create(GetValidDtoBuilder().WithName($"{ThemebookDtoDefaultValues.name}-{2}").Build()),
-                await themebookServiceMock.Create(GetValidDtoBuilder().WithName($"{ThemebookDtoDefaultValues.name}-{3}").Build()),
+                await themebookServiceMock.Create(GetValidRandomDto(1)),
+                await themebookServiceMock.Create(GetValidRandomDto(2)),
+                await themebookServiceMock.Create(GetValidRandomDto(3)),
             };
 
+            themebooks.ForEach(themebook => themebook.SetIdForUniTesting());
 
             context.Setup(a => a.Themebooks).ReturnsDbSet(themebooks);
+            context.Setup(a => a.Set<Themebook>()).ReturnsDbSet(themebooks);
         }
 
         [Test]
@@ -83,17 +86,39 @@ namespace AthenaBackend.InfrastructureTest.WriteModel.Core.Themebooks
             await themebookRepository.GetByCode($"TEST").ShouldThrowAsync<DomainException>();
         }
 
+        [Test]
         public async Task IsUniqueByCode_ValidCode_ShouldBeTrue()
         {
             (await themebookRepository.IsUniqueByCode($"TEST")).ShouldBeTrue();
         }
-
+        
+        [Test]
         public async Task IsUniqueByCode_ValidCode_ShouldBeFalse()
         {
             (await themebookRepository.IsUniqueByCode($"{ThemebookDtoDefaultValues.name}-{1}")).ShouldBeFalse();
         }
 
+
+        [Test]
+        public async Task FindByKey_InvalidCode_ShouldBeNull()
+        {
+            var validThemebook = await themebookRepository.FindByKey(Guid.NewGuid());
+
+            validThemebook.ShouldBeNull();
+        }
+
+        [Test]
+        public async Task GetByKey_InvalidCode_ShouldThrowDomainException()
+        {
+            await themebookRepository.GetByKey(Guid.NewGuid()).ShouldThrowAsync<DomainException>();
+        }
+
         #region private utilities
+        private ThemebookDto GetValidRandomDto(short index) 
+            => GetValidDtoBuilder().WithName($"{ThemebookDtoDefaultValues.name}-{index}")
+                                   .WithId(ThemebookDtoDefaultValues.id_updated)
+                                   .Build();
+
         private void InitializeService()
         {
             themebookRepositoryMock = new Mock<IThemebookRepository>();

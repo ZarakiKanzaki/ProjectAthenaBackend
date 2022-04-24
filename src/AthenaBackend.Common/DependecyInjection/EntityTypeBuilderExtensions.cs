@@ -9,8 +9,7 @@ namespace AthenaBackend.Common.DependecyInjection
             where T : Aggregate<TId>
             where TId : struct
         {
-            thisBuilder.Property(x => x.Id)
-                        .IsRequired();
+            thisBuilder.HasKey(x => x.Id);
 
             thisBuilder.Property(x => x.Version).IsRowVersion();
 

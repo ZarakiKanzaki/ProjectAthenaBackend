@@ -96,6 +96,8 @@ namespace AthenaBackend.Domain.Core.Themebooks
             DeleteOperationLog(userId);
         }
 
+        public void SetIdForUniTesting() => Id = Guid.NewGuid();
+
         #region Improvements
         private void HandleImprovements(List<ThemebookImprovementDto> improvements)
         {

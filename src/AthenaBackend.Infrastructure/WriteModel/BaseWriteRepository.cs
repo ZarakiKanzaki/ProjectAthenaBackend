@@ -1,4 +1,5 @@
 ﻿using AthenaBackend.Common.DomainDrivenDesign;
+using AthenaBackend.Domain.Exceptions;
 using System;
 using System.Threading.Tasks;
 
@@ -19,7 +20,7 @@ namespace AthenaBackend.Infrastructure.WriteModel
 
         public async Task<T> GetByKey(TId id)
             => await FindByKey(id)
-            ?? throw new InvalidOperationException($"Cannot find {nameof(T)} with Id {id}");
+            ?? throw new CannotFindEntityDomainException(nameof(T), nameof(id), id.ToString());
 
         public async Task<T> FindByKey(TId id)
             => await Context.Set<T>().FindAsync(id);
