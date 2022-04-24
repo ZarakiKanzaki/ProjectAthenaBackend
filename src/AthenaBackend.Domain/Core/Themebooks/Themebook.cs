@@ -34,8 +34,8 @@ namespace AthenaBackend.Domain.Core.Themebooks
         public virtual IEnumerable<ThemebookImprovement> Improvements => improvements ??= new List<ThemebookImprovement>();
 
 
-        public virtual IEnumerable<TagQuestion> PowerTagQuestions => TagQuestions.Where(a => a.Type == TagType.Power);
-        public virtual IEnumerable<TagQuestion> WeaknessTagQuestions => TagQuestions.Where(a => a.Type == TagType.Weakness);
+        protected virtual IEnumerable<TagQuestion> PowerTagQuestions => TagQuestions.Where(a => a.Type == TagType.Power);
+        protected virtual IEnumerable<TagQuestion> WeaknessTagQuestions => TagQuestions.Where(a => a.Type == TagType.Weakness);
 
         protected Themebook()
         {
@@ -58,6 +58,7 @@ namespace AthenaBackend.Domain.Core.Themebooks
                 Type = ThemebookTypes.GetThemebookByKey(dto.TypeId),
             };
 
+            themebook.Concept = ThemebookConcept.Create(themebook, dto.ThemebookConcept);
             themebook.AddExamplesOfApplication(dto.ExamplesOfApplication);
             themebook.AddMysteryOptions(dto.MisteryOptions);
             themebook.AddTitleExamples(dto.TitleExamples);
@@ -76,7 +77,8 @@ namespace AthenaBackend.Domain.Core.Themebooks
             Name = dto.Name;
             Description = dto.Description;
             Type = ThemebookTypes.GetThemebookByKey(dto.TypeId);
-
+            Concept.Update(dto.ThemebookConcept);
+            
             HandleExamplesOfApplications(dto.ExamplesOfApplication);
             HandleMisteryOptions(dto.MisteryOptions);
             HandleTitleExamples(dto.TitleExamples);

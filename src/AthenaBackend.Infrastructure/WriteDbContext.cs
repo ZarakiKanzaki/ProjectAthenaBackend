@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AthenaBackend.Domain.Core.Themebooks;
+using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace AthenaBackend.Infrastructure
 {
@@ -6,6 +8,22 @@ namespace AthenaBackend.Infrastructure
     {
         public WriteDbContext(DbContextOptions<WriteDbContext> options) : base(options)
         {
+        }
+
+        public virtual DbSet<Themebook> Themebooks { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (optionsBuilder.IsConfigured == false)
+            {
+                optionsBuilder.UseSqlite("ConnectionString");
+            }
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

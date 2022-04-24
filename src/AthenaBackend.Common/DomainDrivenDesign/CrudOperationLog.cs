@@ -5,6 +5,10 @@ namespace AthenaBackend.Common.DomainDrivenDesign
 {
     public class CrudOperationLog : ValueObject
     {
+        protected CrudOperationLog()
+        {
+
+        }
         public CrudOperationLog(Guid userCreatedId)
         {
             Creation = new OperationLog(userCreatedId);

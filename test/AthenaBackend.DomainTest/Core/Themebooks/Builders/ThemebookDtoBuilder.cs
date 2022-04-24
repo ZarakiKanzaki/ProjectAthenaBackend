@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace AthenaBackend.DomainTest.Core.Themebooks.Builders
 {
-    internal class ThemebookDtoBuilder
+    public class ThemebookDtoBuilder
     {
         private Guid userId = Guid.NewGuid();
         private Guid? id = null;

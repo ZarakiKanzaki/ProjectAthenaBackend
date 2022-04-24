@@ -1,14 +1,14 @@
-﻿using NUnit.Framework;
+﻿using AthenaBackend.Domain.Core.Themebooks;
+using AthenaBackend.Domain.Core.Themebooks.Dtos;
+using AthenaBackend.Domain.Exceptions;
 using AthenaBackend.DomainTest.Core.Themebooks.Builders;
+using AthenaBackend.DomainTest.Core.Themebooks.Defaults;
+using Moq;
+using NUnit.Framework;
 using Shouldly;
 using System;
-using Moq;
-using AthenaBackend.Domain.Core.Themebooks;
-using System.Threading.Tasks;
-using AthenaBackend.Domain.Core.Themebooks.Dtos;
-using AthenaBackend.DomainTest.Core.Themebooks.Defaults;
-using AthenaBackend.Domain.Exceptions;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace AthenaBackend.DomainTest.Core.Themebooks
 {
@@ -52,14 +52,20 @@ namespace AthenaBackend.DomainTest.Core.Themebooks
         }
 
 
+        [Test]
+        public void Create_InvalidConcept_ThrowsDomainException()
+        {
+            var invalidImprovementDto = GetValidThemebookDtoWithInvalidConcept();
 
+            Should.ThrowAsync<DomainException>(async () => await themebookServiceMock.Create(invalidImprovementDto));
+        }
 
         [Test]
         public void Create_InvalidImprovement_ThrowsAggregateException()
         {
-            var invalidImprovementDto = GetValidThemebookWithInvalidImprovementDto();
+            var invalidConceptDto = GetValidThemebookWithInvalidImprovementDto();
 
-            Should.ThrowAsync<AggregateException>(async () => await themebookServiceMock.Create(invalidImprovementDto));
+            Should.ThrowAsync<AggregateException>(async () => await themebookServiceMock.Create(invalidConceptDto));
         }
 
         [Test]
@@ -82,7 +88,6 @@ namespace AthenaBackend.DomainTest.Core.Themebooks
                             IsThemebookTheSameCreated(themebook, createdThemebook)
                         )),
                         Times.Once);
-
         }
 
         [Test]
@@ -148,6 +153,19 @@ namespace AthenaBackend.DomainTest.Core.Themebooks
 
         }
 
+        [Test]
+        public async Task Update_InvalidConcept_ThrowsDomainException()
+        {
+            var invalidConceptDto = GetValidThemebookDtoWithInvalidConcept();
+            var existentDto = GetExistantDto();
+            await SetupForUpdate(invalidConceptDto, existentDto);
+
+            await themebookServiceMock.Update(invalidConceptDto).ShouldThrowAsync<DomainException>();
+        }
+
+
+
+
         #region Utility Functions
         private async Task SetupForUpdate(ThemebookDto invalidDto, ThemebookDto existentDto)
         {
@@ -167,6 +185,16 @@ namespace AthenaBackend.DomainTest.Core.Themebooks
             && themebook.Type == createdThemebook.Type
             && themebook.Concept == createdThemebook.Concept;
 
+
+        private ThemebookDto GetValidThemebookDtoWithInvalidConcept()
+            => GetValidDtoBuilder()
+                    .WithThemebookConcept(GetInvalidConceptDto())
+                    .Build();
+
+        private ThemebookConceptDto GetInvalidConceptDto() 
+            => themebookConceptDtoBuilder
+                    .WithQuestion(null)
+                    .Build();
 
         private ThemebookDto GetExistantDto() => GetValidDtoBuilder().WithId(ThemebookDtoDefaultValues.id_updated).Build();
 

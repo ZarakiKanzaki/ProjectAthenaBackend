@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="HotChocolate.Data.EntityFramework" Version="12.7.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.16">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -19,7 +20,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Persistence\" />
+    <Folder Include="ReadModel\Core\Themebook\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AthenaBackend.Common\AthenaBackend.Common.csproj" />
+    <ProjectReference Include="..\AthenaBackend.Domain\AthenaBackend.Domain.csproj" />
   </ItemGroup>
 
 </Project>

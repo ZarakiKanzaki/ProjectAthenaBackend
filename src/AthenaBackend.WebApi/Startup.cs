@@ -25,13 +25,16 @@ namespace AthenaBackend.WebApi
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHttpContextAccessor();
+            services.AddEntityFrameworkSqlite();
+
             services.AddApplication();
             services.AddInfrastructure(Configuration);
 
             InjectDependencies(services);
+
 
             services.AddGraphQLServer()
                     .AddQueryType<Query>();
@@ -45,9 +48,9 @@ namespace AthenaBackend.WebApi
 
             services.AddRepositories(domainAssembly, infrastructureAssembly);
             services.AddServices(domainAssembly);
-            services.AddConverters(domainAssembly);
-            services.AddConverters(infrastructureAssembly);
-            services.AddConverters(applicationAssembly);
+            //services.AddConverters(domainAssembly);
+            //services.AddConverters(infrastructureAssembly);
+            //services.AddConverters(applicationAssembly);
         }
 
         private Assembly GetApplicationAssembly() => GetAssemblyByName(APPLICATION_NAME);

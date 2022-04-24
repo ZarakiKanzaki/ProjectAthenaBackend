@@ -9,4 +9,12 @@
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AthenaBackend.Domain\AthenaBackend.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ReadModel\Core\Themebooks\" />
+  </ItemGroup>
+
 </Project>

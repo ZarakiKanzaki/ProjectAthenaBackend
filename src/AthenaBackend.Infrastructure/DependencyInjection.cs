@@ -21,6 +21,12 @@ namespace AthenaBackend.Infrastructure
                             (s, o) => o.UseSqlite(connectionString)
                                         .UseLoggerFactory(s.GetRequiredService<ILoggerFactory>()));
 
+            services.AddScoped<PooledReadDbContextFactory>();
+            services.AddScoped<PooledWriteDbContextFactory>();
+
+            services.AddScoped(sp => sp.GetRequiredService<PooledWriteDbContextFactory>().CreateDbContext());
+            services.AddScoped(sp => sp.GetRequiredService<PooledReadDbContextFactory>().CreateDbContext());
+
             return services;
         }
     }

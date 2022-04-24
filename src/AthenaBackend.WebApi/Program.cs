@@ -21,8 +21,8 @@ namespace AthenaBackend.WebApi
         {
             using var scope = host.Services.CreateScope();
 
-            HandleReadContext(scope);
             HandleWriteContext(scope);
+            HandleReadContext(scope);
         }
 
         private static void HandleWriteContext(IServiceScope scope)
