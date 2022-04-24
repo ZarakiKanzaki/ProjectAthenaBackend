@@ -45,6 +45,19 @@ namespace AthenaBackend.CommonTest
             converter.ShouldNotBeNull();
         }
 
+        [Test]
+        public void AddReadRepositories()
+        {
+
+            var services = new ServiceCollection();
+            services.AddReadRepositories(currentAssembly);
+
+            var provider = services.BuildServiceProvider();
+            var readRepository = provider.GetService<IReadRepository<FakeAggregate, int>>();
+
+            readRepository.ShouldNotBeNull();
+        }
+
 
         [Test]
         public void AddRepositories()
@@ -105,6 +118,33 @@ namespace AthenaBackend.CommonTest
     class FakeRepository1 : IFakeRepository1 { }
     interface IFakeRepository2 : IRepository { }
     class FakeRepository2 : IFakeRepository2 { }
+    class FakeReadRepositoryOfT1 : IReadRepository<FakeAggregate, int> 
+    {
+        public Task<FakeAggregate> FindByCode(string code)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<FakeAggregate> FindByKey(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<FakeAggregate> GetByCode(string code)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<FakeAggregate> GetByKey(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<bool> IsUniqueByCode(string code)
+        {
+            throw new System.NotImplementedException();
+        }
+    }
 
     interface IFakeRepositoryOfT1 : IRepository<FakeAggregate, int> { }
     class FakeRepositoryOfT1 : IFakeRepositoryOfT1

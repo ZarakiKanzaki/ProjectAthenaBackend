@@ -70,5 +70,18 @@ namespace AthenaBackend.Common.DependecyInjection
             return services;
         }
 
+        public static IServiceCollection AddReadRepositories(this IServiceCollection services, Assembly interfaceAssembly)
+        {
+            var convertersTypes = interfaceAssembly.GetClassesThatImplementedReadRepositories();
+
+            foreach (var convertersType in convertersTypes)
+            {
+                var interfaceType = convertersType.GetInterfaces().FirstOrDefault();
+                services.AddScoped(interfaceType, convertersType);
+            }
+
+            return services;
+        }
+
     }
 }

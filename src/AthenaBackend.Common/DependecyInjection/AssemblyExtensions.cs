@@ -1,4 +1,5 @@
 ﻿using AthenaBackend.Common.Converters;
+using AthenaBackend.Common.DomainDrivenDesign;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +34,11 @@ namespace AthenaBackend.Common.DependecyInjection
         public static List<Type> GetClassesImplementingIConverter(this Assembly thisAssembly)
             => thisAssembly.GetTypes()
                            .Where(p => p.GetInterfaces().Any(i => i.Name == typeof(IConverter<,>).Name))
+                           .ToList();
+
+        public static List<Type> GetClassesThatImplementedReadRepositories(this Assembly thisAssembly)
+            => thisAssembly.GetTypes()
+                           .Where(p => p.GetInterfaces().Any(i => i.Name == typeof(IReadRepository<,>).Name))
                            .ToList();
 
     }

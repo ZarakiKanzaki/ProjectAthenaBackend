@@ -48,9 +48,10 @@ namespace AthenaBackend.WebApi
 
             services.AddRepositories(domainAssembly, infrastructureAssembly);
             services.AddServices(domainAssembly);
-            //services.AddConverters(domainAssembly);
-            //services.AddConverters(infrastructureAssembly);
-            //services.AddConverters(applicationAssembly);
+            services.AddReadRepositories(infrastructureAssembly);
+            services.AddConverters(domainAssembly);
+            services.AddConverters(infrastructureAssembly);
+            services.AddConverters(applicationAssembly);
         }
 
         private Assembly GetApplicationAssembly() => GetAssemblyByName(APPLICATION_NAME);

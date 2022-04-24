@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace AthenaBackend.Infrastructure.ReadModel
 {
-    public abstract class BaseReadRepository<T, TId>
+    public abstract class BaseReadRepository<T, TId>: IReadRepository<T, TId>
         where T : Aggregate<TId>
         where TId : struct
     {

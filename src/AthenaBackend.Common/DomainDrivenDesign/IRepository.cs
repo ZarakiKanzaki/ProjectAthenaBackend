@@ -16,4 +16,15 @@ namespace AthenaBackend.Common.DomainDrivenDesign
     }
 
     public interface IRepository { }
+
+    public interface IReadRepository<T, TId>
+        where T : Aggregate<TId>
+        where TId : struct
+    {
+        Task<T> FindByKey(TId id);
+        Task<T> FindByCode(string code);
+        Task<T> GetByKey(TId id);
+        Task<T> GetByCode(string code);
+        Task<bool> IsUniqueByCode(string code);
+    }
 }

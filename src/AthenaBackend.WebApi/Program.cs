@@ -12,12 +12,12 @@ namespace AthenaBackend.WebApi
         {
             var host = CreateHostBuilder(args).Build();
 
-            MigrateToLatestVersionOfDB(host);
+            MigrateToLatestVersionOfDb(host);
 
             host.Run();
         }
 
-        private static void MigrateToLatestVersionOfDB(IHost host)
+        private static void MigrateToLatestVersionOfDb(IHost host)
         {
             using var scope = host.Services.CreateScope();
 
