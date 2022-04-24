@@ -46,7 +46,6 @@ namespace AthenaBackend.Domain.Core.Themebooks
         {
         }
 
-
         protected internal static Themebook Create(ThemebookDto dto)
         {
             Validate(dto);

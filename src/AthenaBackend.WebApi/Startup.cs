@@ -30,14 +30,14 @@ namespace AthenaBackend.WebApi
             services.AddHttpContextAccessor();
             services.AddEntityFrameworkSqlite();
 
+
+            services.AddGraphQLServer()
+                    .AddQueryType<Query>();
+
             services.AddApplication();
             services.AddInfrastructure(Configuration);
 
             InjectDependencies(services);
-
-
-            services.AddGraphQLServer()
-                    .AddQueryType<Query>();
         }
 
         private void InjectDependencies(IServiceCollection services)

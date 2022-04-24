@@ -1,6 +1,5 @@
 ﻿using AthenaBackend.Common.DomainDrivenDesign;
 using AthenaBackend.Domain.Exceptions;
-using System;
 using System.Threading.Tasks;
 
 namespace AthenaBackend.Infrastructure.WriteModel
