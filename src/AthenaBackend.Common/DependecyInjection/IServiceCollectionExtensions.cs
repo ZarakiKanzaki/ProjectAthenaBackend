@@ -82,6 +82,5 @@ namespace AthenaBackend.Common.DependecyInjection
 
             return services;
         }
-
     }
 }

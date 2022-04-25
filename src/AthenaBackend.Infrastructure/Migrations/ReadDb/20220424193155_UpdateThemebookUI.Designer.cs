@@ -3,14 +3,16 @@ using System;
 using AthenaBackend.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace AthenaBackend.Infrastructure.Migrations
+namespace AthenaBackend.Infrastructure.Migrations.ReadDb
 {
-    [DbContext(typeof(WriteDbContext))]
-    partial class WriteDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(ReadDbContext))]
+    [Migration("20220424193155_UpdateThemebookUI")]
+    partial class UpdateThemebookUI
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -80,7 +82,7 @@ namespace AthenaBackend.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Themebooks");
+                    b.ToTable("Themebook");
                 });
 
             modelBuilder.Entity("AthenaBackend.Domain.Core.Themebooks.ThemebookConcept", b =>
@@ -230,7 +232,7 @@ namespace AthenaBackend.Infrastructure.Migrations
 
                             b1.HasKey("ThemebookId");
 
-                            b1.ToTable("Themebooks");
+                            b1.ToTable("Themebook");
 
                             b1.WithOwner()
                                 .HasForeignKey("ThemebookId");
@@ -250,7 +252,7 @@ namespace AthenaBackend.Infrastructure.Migrations
 
                                     b2.HasKey("CrudOperationLogThemebookId");
 
-                                    b2.ToTable("Themebooks");
+                                    b2.ToTable("Themebook");
 
                                     b2.WithOwner()
                                         .HasForeignKey("CrudOperationLogThemebookId");
@@ -271,7 +273,7 @@ namespace AthenaBackend.Infrastructure.Migrations
 
                                     b2.HasKey("CrudOperationLogThemebookId");
 
-                                    b2.ToTable("Themebooks");
+                                    b2.ToTable("Themebook");
 
                                     b2.WithOwner()
                                         .HasForeignKey("CrudOperationLogThemebookId");
@@ -292,7 +294,7 @@ namespace AthenaBackend.Infrastructure.Migrations
 
                                     b2.HasKey("CrudOperationLogThemebookId");
 
-                                    b2.ToTable("Themebooks");
+                                    b2.ToTable("Themebook");
 
                                     b2.WithOwner()
                                         .HasForeignKey("CrudOperationLogThemebookId");
@@ -319,7 +321,7 @@ namespace AthenaBackend.Infrastructure.Migrations
 
                             b1.HasKey("ThemebookId");
 
-                            b1.ToTable("Themebooks");
+                            b1.ToTable("Themebook");
 
                             b1.WithOwner()
                                 .HasForeignKey("ThemebookId");

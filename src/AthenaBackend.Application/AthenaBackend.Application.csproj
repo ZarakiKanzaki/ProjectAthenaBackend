@@ -11,10 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AthenaBackend.Domain\AthenaBackend.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ReadModel\Core\Themebooks\" />
+    <ProjectReference Include="..\AthenaBackend.Infrastructure\AthenaBackend.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

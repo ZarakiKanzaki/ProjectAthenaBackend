@@ -1,7 +1,7 @@
-﻿using System.Linq;
-using AthenaBackend.Domain.Exceptions;
+﻿using AthenaBackend.Domain.Exceptions;
 using NUnit.Framework;
 using Shouldly;
+using System.Linq;
 namespace AthenaBackend.DomainTest.Exceptions
 {
     public class DomainExceptionTest
@@ -61,6 +61,7 @@ namespace AthenaBackend.DomainTest.Exceptions
         {
             var exception = new NullReferenceDomainException($"MESSAGE");
             Should.Throw<DomainException>(() => throw exception);
+            Should.Throw<NullReferenceDomainException>(() => throw exception);
         }
 
         [Test]
@@ -68,14 +69,16 @@ namespace AthenaBackend.DomainTest.Exceptions
         {
             var exception = new NullOrWhiteSpaceDomainException($"MESSAGE");
             Should.Throw<DomainException>(() => throw exception);
+            Should.Throw<NullOrWhiteSpaceDomainException>(() => throw exception);
         }
 
-        
+
         [Test]
         public void ConstructorCodeAlreadyExists_WithMessageCodeParameters()
         {
             var exception = new CodeAlreadyExistsDomainException($"MESSAGE", $"TEST");
             Should.Throw<DomainException>(() => throw exception);
+            Should.Throw<CodeAlreadyExistsDomainException>(() => throw exception);
         }
 
         [Test]
@@ -83,6 +86,7 @@ namespace AthenaBackend.DomainTest.Exceptions
         {
             var exception = new CannotFindEntityDomainException($"MESSAGE", $"TEST", $"TEST");
             Should.Throw<DomainException>(() => throw exception);
+            Should.Throw<CannotFindEntityDomainException>(() => throw exception);
         }
 
     }

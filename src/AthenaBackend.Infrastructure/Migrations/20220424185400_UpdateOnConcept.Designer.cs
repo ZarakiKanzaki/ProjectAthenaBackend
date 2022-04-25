@@ -3,14 +3,16 @@ using System;
 using AthenaBackend.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AthenaBackend.Infrastructure.Migrations
 {
     [DbContext(typeof(WriteDbContext))]
-    partial class WriteDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220424185400_UpdateOnConcept")]
+    partial class UpdateOnConcept
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

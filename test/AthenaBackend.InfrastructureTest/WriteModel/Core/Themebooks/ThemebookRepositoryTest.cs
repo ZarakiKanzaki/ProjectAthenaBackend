@@ -5,15 +5,15 @@ using AthenaBackend.DomainTest.Core.Themebooks.Builders;
 using AthenaBackend.DomainTest.Core.Themebooks.Defaults;
 using AthenaBackend.Infrastructure;
 using AthenaBackend.Infrastructure.WriteModel.Core.Themebooks;
+using AthenaBackend.InfrastructureTest.ReadModel.Core.Themebooks.Defaults;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using Moq.EntityFrameworkCore;
 using NUnit.Framework;
 using Shouldly;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System;
-using System.Linq;
 
 namespace AthenaBackend.InfrastructureTest.WriteModel.Core.Themebooks
 {
@@ -57,10 +57,10 @@ namespace AthenaBackend.InfrastructureTest.WriteModel.Core.Themebooks
         }
 
         [Test]
-        public async Task FindByCode_ValidCode_ShouldNotBeNull() 
+        public async Task FindByCode_ValidCode_ShouldNotBeNull()
         {
             var validThemebook = await themebookRepository.FindByCode($"{ThemebookDtoDefaultValues.name}-{1}");
-            
+
             validThemebook.ShouldNotBeNull();
         }
 
@@ -91,7 +91,7 @@ namespace AthenaBackend.InfrastructureTest.WriteModel.Core.Themebooks
         {
             (await themebookRepository.IsUniqueByCode($"TEST")).ShouldBeTrue();
         }
-        
+
         [Test]
         public async Task IsUniqueByCode_ValidCode_ShouldBeFalse()
         {
@@ -114,7 +114,7 @@ namespace AthenaBackend.InfrastructureTest.WriteModel.Core.Themebooks
         }
 
         #region private utilities
-        private ThemebookDto GetValidRandomDto(short index) 
+        private ThemebookDto GetValidRandomDto(short index)
             => GetValidDtoBuilder().WithName($"{ThemebookDtoDefaultValues.name}-{index}")
                                    .WithId(ThemebookDtoDefaultValues.id_updated)
                                    .Build();

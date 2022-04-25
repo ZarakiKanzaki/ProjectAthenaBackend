@@ -4,6 +4,7 @@ using AthenaBackend.Common.DomainDrivenDesign;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using Shouldly;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Threading.Tasks;
 
@@ -95,7 +96,6 @@ namespace AthenaBackend.CommonTest
             (fakeRepository2 is FakeRepositoryOfT2).ShouldBeTrue();
         }
 
-
     }
 
     #region metadata to test
@@ -118,7 +118,8 @@ namespace AthenaBackend.CommonTest
     class FakeRepository1 : IFakeRepository1 { }
     interface IFakeRepository2 : IRepository { }
     class FakeRepository2 : IFakeRepository2 { }
-    class FakeReadRepositoryOfT1 : IReadRepository<FakeAggregate, int> 
+
+    class FakeReadRepositoryOfT1 : IReadRepository<FakeAggregate, int>
     {
         public Task<FakeAggregate> FindByCode(string code)
         {
@@ -140,7 +141,7 @@ namespace AthenaBackend.CommonTest
             throw new System.NotImplementedException();
         }
 
-        public Task<bool> IsUniqueByCode(string code)
+        public Task<IEnumerable<FakeAggregate>> GetList()
         {
             throw new System.NotImplementedException();
         }

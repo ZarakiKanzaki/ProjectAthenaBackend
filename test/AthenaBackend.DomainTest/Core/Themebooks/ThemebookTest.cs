@@ -191,7 +191,7 @@ namespace AthenaBackend.DomainTest.Core.Themebooks
                     .WithThemebookConcept(GetInvalidConceptDto())
                     .Build();
 
-        private ThemebookConceptDto GetInvalidConceptDto() 
+        private ThemebookConceptDto GetInvalidConceptDto()
             => themebookConceptDtoBuilder
                     .WithQuestion(null)
                     .Build();

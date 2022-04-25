@@ -19,14 +19,14 @@ namespace AthenaBackend.Domain.WellKnownInstances
     public static class ThemebookTypes
     {
         #region Themebooks
-        public static ThemebookType Mythos = new ThemebookType(1, "Mythos");
-        public static ThemebookType Logos = new ThemebookType(2, "Logos");
-        public static ThemebookType Mist = new ThemebookType(3, "Mist");
-        public static ThemebookType Crew = new ThemebookType(4, "Crew");
-        public static ThemebookType Extra = new ThemebookType(5, "Extra");
+        public readonly static ThemebookType Mythos = new(1, "Mythos");
+        public readonly static ThemebookType Logos = new(2, "Logos");
+        public readonly static ThemebookType Mist = new(3, "Mist");
+        public readonly static ThemebookType Crew = new(4, "Crew");
+        public readonly static ThemebookType Extra = new(5, "Extra");
         #endregion
 
-        public static List<ThemebookType> All = new List<ThemebookType>
+        public readonly static List<ThemebookType> All = new()
         {
             Mythos,
             Logos,
@@ -38,9 +38,9 @@ namespace AthenaBackend.Domain.WellKnownInstances
         public static ThemebookType FindThemebookByKey(short id) => All.FirstOrDefault(a => a.Id == id);
         public static ThemebookType FindThemebookByName(string name) => All.FirstOrDefault(a => a.Name.ToLower().Equals(name.ToLower()));
         public static ThemebookType GetThemebookByKey(short id) => All.FirstOrDefault(a => a.Id == id)
-                                                                ?? throw new DomainException($"Themebook type with id value {id} not foud");
+                                                                ?? throw new CannotFindEntityDomainException(nameof(ThemebookType), nameof(id), id);
         public static ThemebookType GetThemebookByName(string name) => All.FirstOrDefault(a => a.Name.ToLower().Equals(name.ToLower()))
-                                                                    ?? throw new DomainException($"Themebook type with name value {name} not foud");
+                                                                ?? throw new CannotFindEntityDomainException(nameof(ThemebookType), nameof(name), name);
 
     }
 }

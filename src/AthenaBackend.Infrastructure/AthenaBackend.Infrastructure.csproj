@@ -20,12 +20,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ReadModel\Core\Themebook\" />
+    <ProjectReference Include="..\AthenaBackend.Common\AthenaBackend.Common.csproj" />
+    <ProjectReference Include="..\AthenaBackend.Domain\AthenaBackend.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AthenaBackend.Common\AthenaBackend.Common.csproj" />
-    <ProjectReference Include="..\AthenaBackend.Domain\AthenaBackend.Domain.csproj" />
+    <Folder Include="Migrations\ReadDb\" />
   </ItemGroup>
 
 </Project>

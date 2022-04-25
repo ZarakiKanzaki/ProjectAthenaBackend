@@ -77,7 +77,7 @@ namespace AthenaBackend.Domain.Core.Themebooks
             Description = dto.Description;
             Type = ThemebookTypes.GetThemebookByKey(dto.TypeId);
             Concept.Update(dto.ThemebookConcept);
-            
+
             HandleExamplesOfApplications(dto.ExamplesOfApplication);
             HandleMisteryOptions(dto.MisteryOptions);
             HandleTitleExamples(dto.TitleExamples);
