@@ -12,7 +12,7 @@ namespace AthenaBackend.Infrastructure.ReadModel.Core.Themebooks.UI
         public ThemebookType Type { get; set; }
         public ThemebookConceptUI ThemebookConcept { get; set; }
         public List<string> ExamplesOfApplication { get; set; } = new List<string>();
-        public List<string> MisteryOptions { get; set; } = new List<string>();
+        public List<string> IdentityMisteryOptions { get; set; } = new List<string>();
         public List<string> TitleExamples { get; set; } = new List<string>();
         public List<string> CrewRelationships { get; set; } = new List<string>();
         public List<TagQuestionUI> TagQuestions { get; set; } = new List<TagQuestionUI>();

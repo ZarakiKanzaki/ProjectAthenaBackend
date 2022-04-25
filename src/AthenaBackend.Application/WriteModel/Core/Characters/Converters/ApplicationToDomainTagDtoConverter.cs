@@ -4,7 +4,7 @@ using DomainTagDto = AthenaBackend.Domain.Core.Characters.Dtos.TagDto;
 
 namespace AthenaBackend.Application.WriteModel.Core.Characters.Converters
 {
-    public class TagApplicationDtoToTagDomainDtoConverter : BaseConverterWithValidation<ApplicationTagDto, DomainTagDto, TagApplicationDtoToTagDomainDtoConverter>
+    public class ApplicationToDomainTagDtoConverter : BaseConverterWithValidation<ApplicationTagDto, DomainTagDto, ApplicationToDomainTagDtoConverter>
     {
         protected override DomainTagDto GetConvertedObject(ApplicationTagDto objectToConvert)
             => new DomainTagDto

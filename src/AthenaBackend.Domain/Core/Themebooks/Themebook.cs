@@ -138,7 +138,7 @@ namespace AthenaBackend.Domain.Core.Themebooks
         {
             foreach (var improvement in toAdd)
             {
-                ThemebookImprovement.Create(this, improvement);
+               improvements.Add(ThemebookImprovement.Create(this, improvement));
             }
         }
         #endregion
@@ -180,7 +180,7 @@ namespace AthenaBackend.Domain.Core.Themebooks
         {
             foreach (var tagToAdd in toAdd)
             {
-                TagQuestion.Create(this, tagToAdd);
+               tagQuestions.Add(TagQuestion.Create(this, tagToAdd));
             }
         }
 

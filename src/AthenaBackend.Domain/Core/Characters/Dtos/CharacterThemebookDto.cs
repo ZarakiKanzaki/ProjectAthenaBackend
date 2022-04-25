@@ -15,7 +15,7 @@ namespace AthenaBackend.Domain.Core.Characters.Dtos
         public string Flipside { get; set; }
         public short AttentionLevel { get; set; } = 0;
         public short FadeCrackLevel { get; set; } = 0;
-        public List<CharacterThemebookTagDto> Tags { get; set; }
+        public List<CharacterThemebookTagDto> Tags { get; set; } = new List<CharacterThemebookTagDto>();
     }
 
 }

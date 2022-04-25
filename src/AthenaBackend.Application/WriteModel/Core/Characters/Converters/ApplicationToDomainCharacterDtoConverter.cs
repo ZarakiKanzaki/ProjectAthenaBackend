@@ -10,16 +10,16 @@ using DomainTagDto = AthenaBackend.Domain.Core.Characters.Dtos.TagDto;
 
 namespace AthenaBackend.Application.WriteModel.Core.Characters.Converters
 {
-    public class CharacterApplicationDtoToCharacterDomainDtoConverter : BaseConverterWithValidation<ApplicationCharacterDto, DomainCharacterDto, CharacterApplicationDtoToCharacterDomainDtoConverter>
+    public class ApplicationToDomainCharacterDtoConverter : BaseConverterWithValidation<ApplicationCharacterDto, DomainCharacterDto, ApplicationToDomainCharacterDtoConverter>
     {
-        private readonly IConverter<ApplicationTagDto, DomainTagDto> applicationTagToDomainTagConverter;
-        private readonly IConverter<ApplicationCharacterThemebookDto, DomainCharacterThemebookDto> applicationThemebookToDomainThemebookConverter;
+        private readonly IConverter<ApplicationTagDto, DomainTagDto> applicationToDomainTagDtoConverter;
+        private readonly IConverter<ApplicationCharacterThemebookDto, DomainCharacterThemebookDto> applicationToDomainThemebookDtoConverter;
 
-        public CharacterApplicationDtoToCharacterDomainDtoConverter(IConverter<ApplicationTagDto, DomainTagDto> applicationTagToDomainTagConverter,
-                                                                    IConverter<ApplicationCharacterThemebookDto, DomainCharacterThemebookDto> applicationThemebookToDomainThemebookConverter)
+        public ApplicationToDomainCharacterDtoConverter(IConverter<ApplicationTagDto, DomainTagDto> applicationToDomainTagDtoConverter,
+                                                        IConverter<ApplicationCharacterThemebookDto, DomainCharacterThemebookDto> applicationToDomainThemebookDtoConverter)
         {
-            this.applicationTagToDomainTagConverter = applicationTagToDomainTagConverter;
-            this.applicationThemebookToDomainThemebookConverter = applicationThemebookToDomainThemebookConverter;
+            this.applicationToDomainTagDtoConverter = applicationToDomainTagDtoConverter;
+            this.applicationToDomainThemebookDtoConverter = applicationToDomainThemebookDtoConverter;
         }
 
         protected override DomainCharacterDto GetConvertedObject(ApplicationCharacterDto objectToConvert)
@@ -41,9 +41,9 @@ namespace AthenaBackend.Application.WriteModel.Core.Characters.Converters
 
 
         private List<DomainCharacterThemebookDto> ConvertThemebooks(ApplicationCharacterDto objectToConvert)
-            => objectToConvert.Themebooks.Select(x => applicationThemebookToDomainThemebookConverter.Convert(x)).ToList();
+            => objectToConvert.Themebooks.Select(x => applicationToDomainThemebookDtoConverter.Convert(x)).ToList();
 
         private List<DomainTagDto> ConvertTags(ApplicationCharacterDto objectToConvert)
-            => objectToConvert.Tags.Select(x => applicationTagToDomainTagConverter.Convert(x)).ToList();
+            => objectToConvert.Tags.Select(x => applicationToDomainTagDtoConverter.Convert(x)).ToList();
     }
 }

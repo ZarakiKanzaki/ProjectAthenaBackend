@@ -61,7 +61,7 @@ namespace AthenaBackend.WebApi
         private Assembly GetAssemblyByName(string assemblyName)
             => AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(x => x.FullName.Contains(assemblyName));
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -70,6 +70,8 @@ namespace AthenaBackend.WebApi
 
 
             app.UseRouting();
+
+            app.UseWriteDbContext<WriteDbContext>(Configuration, serviceProvider);
 
             app.UseEndpoints(endpoints =>
             {

@@ -8,15 +8,15 @@ using DomainCharacterThemebookTagDto = AthenaBackend.Domain.Core.Characters.Dtos
 
 namespace AthenaBackend.Application.WriteModel.Core.Characters.Converters
 {
-    public class ApplicationCharacterThemebookDtoToDomainCharacterThemebookDtoConverter
-        : BaseConverterWithValidation<ApplicationCharacterThemebookDto, DomainCharacterThemebookDto, ApplicationCharacterThemebookDtoToDomainCharacterThemebookDtoConverter>
+    public class ApplicationToDomainCharacterThemebookDtoConverter
+        : BaseConverterWithValidation<ApplicationCharacterThemebookDto, DomainCharacterThemebookDto, ApplicationToDomainCharacterThemebookDtoConverter>
     {
 
-        private readonly IConverter<ApplicationCharacterThemebookTagDto, DomainCharacterThemebookTagDto> applicationThemebookTagToDomainThemebookTagConverter;
+        private readonly IConverter<ApplicationCharacterThemebookTagDto, DomainCharacterThemebookTagDto> applicationToDomainThemebookTagDtoConverter;
 
-        public ApplicationCharacterThemebookDtoToDomainCharacterThemebookDtoConverter(
-            IConverter<ApplicationCharacterThemebookTagDto, DomainCharacterThemebookTagDto> applicationThemebookTagToDomainThemebookTagConverter)
-            => this.applicationThemebookTagToDomainThemebookTagConverter = applicationThemebookTagToDomainThemebookTagConverter;
+        public ApplicationToDomainCharacterThemebookDtoConverter(
+            IConverter<ApplicationCharacterThemebookTagDto, DomainCharacterThemebookTagDto> applicationToDomainThemebookTagDtoConverter)
+            => this.applicationToDomainThemebookTagDtoConverter = applicationToDomainThemebookTagDtoConverter;
 
         protected override DomainCharacterThemebookDto GetConvertedObject(ApplicationCharacterThemebookDto objectToConvert)
             => new DomainCharacterThemebookDto
@@ -35,6 +35,6 @@ namespace AthenaBackend.Application.WriteModel.Core.Characters.Converters
             };
 
         private List<DomainCharacterThemebookTagDto> ConvertTags(ApplicationCharacterThemebookDto objectToConvert)
-            => objectToConvert.Tags.Select(x => applicationThemebookTagToDomainThemebookTagConverter.Convert(x)).ToList();
+            => objectToConvert.Tags.Select(x => applicationToDomainThemebookTagDtoConverter.Convert(x)).ToList();
     }
 }

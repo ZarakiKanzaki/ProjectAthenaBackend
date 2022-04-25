@@ -24,7 +24,7 @@ namespace AthenaBackend.Infrastructure.ReadModel.Core.Themebooks
                     .HasConversion(v => JsonConvert.SerializeObject(v),
                                    v => JsonConvert.DeserializeObject<List<string>>(v));
 
-            builder.Property(x => x.MisteryOptions)
+            builder.Property(x => x.IdentityMisteryOptions)
                    .HasConversion(v => JsonConvert.SerializeObject(v),
                                   v => JsonConvert.DeserializeObject<List<string>>(v));
             builder.Property(x => x.TitleExamples)

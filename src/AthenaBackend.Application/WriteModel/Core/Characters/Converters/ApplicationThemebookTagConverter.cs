@@ -4,8 +4,8 @@ using DomainCharacterThemebookTagDto = AthenaBackend.Domain.Core.Characters.Dtos
 
 namespace AthenaBackend.Application.WriteModel.Core.Characters.Converters
 {
-    public class ApplicationCharacterThemebookTagToDomainCharacterThemebookTagConverter
-        : BaseConverterWithValidation<ApplicationCharacterThemebookTagDto, DomainCharacterThemebookTagDto, ApplicationCharacterThemebookTagToDomainCharacterThemebookTagConverter>
+    public class ApplicationThemebookTagConverter
+        : BaseConverterWithValidation<ApplicationCharacterThemebookTagDto, DomainCharacterThemebookTagDto, ApplicationThemebookTagConverter>
     {
         protected override DomainCharacterThemebookTagDto GetConvertedObject(ApplicationCharacterThemebookTagDto objectToConvert)
             => new DomainCharacterThemebookTagDto

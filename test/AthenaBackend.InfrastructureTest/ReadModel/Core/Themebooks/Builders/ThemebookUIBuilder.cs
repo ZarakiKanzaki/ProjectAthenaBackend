@@ -28,7 +28,7 @@ namespace AthenaBackend.InfrastructureTest.ReadModel.Core.Themebooks.Builders
               Type = type,
               ThemebookConcept = themebookConcept,
               ExamplesOfApplication = examplesOfApplication,
-              MisteryOptions = misteryOptions,
+              IdentityMisteryOptions = misteryOptions,
               TitleExamples = titleExamples,
               CrewRelationships = crewRelationships,
               TagQuestions = tagQuestions,

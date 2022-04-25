@@ -28,9 +28,9 @@ namespace AthenaBackend.Application.WriteModel.Core.Characters
 
         public async Task<bool> Handle(CreateCharacterCommand request, CancellationToken cancellationToken)
         {
-            await characterService.Create(converter.Convert(request.Character));
+            var createdCharacter = await characterService.Create(converter.Convert(request.Character));
 
-            return true;
+            return createdCharacter != null;
         }
     }
 }

@@ -9,6 +9,6 @@ namespace AthenaBackend.Application.WriteModel.Core.Themebooks.Dtos
         public Guid? Id { get; set; }
         public string Question { get; set; }
 
-        public List<string> Answers = new List<string>();
+        public List<string> Answers { get; set; } = new List<string>();
     }
 }
