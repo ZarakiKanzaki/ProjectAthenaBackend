@@ -17,12 +17,12 @@ namespace AthenaBackend.Domain.Core.Themebooks
         public virtual ThemebookConcept Concept { get; protected set; }
 
         private List<string> examplesOfApplication = new();
-        private List<string> misteryOptions = new();
+        private List<string> identityMisteryOptions = new();
         private List<string> titleExamples = new();
         private List<string> crewRelationships = new();
 
         public virtual IEnumerable<string> ExamplesOfApplication => examplesOfApplication ??= new List<string>();
-        public virtual IEnumerable<string> MisteryOptions => misteryOptions ??= new List<string>();
+        public virtual IEnumerable<string> IdentityMisteryOptions => identityMisteryOptions ??= new List<string>();
         public virtual IEnumerable<string> TitleExamples => titleExamples ??= new List<string>();
         public virtual IEnumerable<string> CrewRelationships => crewRelationships ??= new List<string>();
 
@@ -59,7 +59,7 @@ namespace AthenaBackend.Domain.Core.Themebooks
 
             themebook.Concept = ThemebookConcept.Create(themebook, dto.ThemebookConcept);
             themebook.AddExamplesOfApplication(dto.ExamplesOfApplication);
-            themebook.AddMysteryOptions(dto.MisteryOptions);
+            themebook.AddMysteryOptions(dto.IdentityMisteryOptions);
             themebook.AddTitleExamples(dto.TitleExamples);
             themebook.AddCrewRelationships(dto.CrewRelationships);
 
@@ -79,7 +79,7 @@ namespace AthenaBackend.Domain.Core.Themebooks
             Concept.Update(dto.ThemebookConcept);
 
             HandleExamplesOfApplications(dto.ExamplesOfApplication);
-            HandleMisteryOptions(dto.MisteryOptions);
+            HandleMisteryOptions(dto.IdentityMisteryOptions);
             HandleTitleExamples(dto.TitleExamples);
             HandleCrewRelationships(dto.CrewRelationships);
 
@@ -211,12 +211,12 @@ namespace AthenaBackend.Domain.Core.Themebooks
 
         private void HandleMisteryOptions(List<string> misteryOptions)
         {
-            this.misteryOptions.Clear();
+            this.identityMisteryOptions.Clear();
             AddMysteryOptions(misteryOptions);
         }
 
         private void AddMysteryOptions(List<string> misteryOptions)
-            => this.misteryOptions.AddRange(misteryOptions);
+            => this.identityMisteryOptions.AddRange(misteryOptions);
 
         private void HandleExamplesOfApplications(List<string> examplesOfApplication)
         {

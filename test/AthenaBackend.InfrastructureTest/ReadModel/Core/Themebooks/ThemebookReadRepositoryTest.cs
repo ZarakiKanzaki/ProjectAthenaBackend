@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AthenaBackend.Common.DomainDrivenDesign;
+﻿using AthenaBackend.Common.DomainDrivenDesign;
 using AthenaBackend.Domain.Exceptions;
 using AthenaBackend.Domain.WellKnownInstances;
 using AthenaBackend.Infrastructure;
@@ -16,6 +11,10 @@ using Moq;
 using Moq.EntityFrameworkCore;
 using NUnit.Framework;
 using Shouldly;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace AthenaBackend.InfrastructureTest.ReadModel.Core.Themebooks
 {

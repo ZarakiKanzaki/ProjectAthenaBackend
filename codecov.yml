@@ -1,2 +1,3 @@
 ignore:
   - "src/AthenaBackend.Infrastructure/Migrations/**/*" 
+  - "src/AthenaBackend.Infrastructure/Migrations/*" 

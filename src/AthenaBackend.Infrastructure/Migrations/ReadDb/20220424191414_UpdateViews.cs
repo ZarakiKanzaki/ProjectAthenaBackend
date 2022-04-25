@@ -1,18 +1,15 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace AthenaBackend.Infrastructure.Migrations.ReadDb
+﻿namespace AthenaBackend.Infrastructure.Migrations.ReadDb
 {
-using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+    using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace AthenaBackend.Infrastructure.Migrations.ReadDb
-{
-    public partial class UpdateViews : Migration
+    namespace AthenaBackend.Infrastructure.Migrations.ReadDb
     {
-        protected override void Up(MigrationBuilder migrationBuilder)
+        public partial class UpdateViews : Migration
         {
-            migrationBuilder.Sql(@"drop view ThemebookUI;");
-            migrationBuilder.Sql($@"
+            protected override void Up(MigrationBuilder migrationBuilder)
+            {
+                migrationBuilder.Sql(@"drop view ThemebookUI;");
+                migrationBuilder.Sql($@"
                 CREATE VIEW ThemebookUI
                 AS
                 SELECT [Id]
@@ -36,8 +33,8 @@ namespace AthenaBackend.Infrastructure.Migrations.ReadDb
                   WHERE [IsDeleted] = 0;
             ");
 
-            migrationBuilder.Sql(@"drop view ThemebookImprovementUI;");
-            migrationBuilder.Sql($@"
+                migrationBuilder.Sql(@"drop view ThemebookImprovementUI;");
+                migrationBuilder.Sql($@"
                 CREATE VIEW ThemebookImprovementUI
                 AS
                 SELECT [Id]
@@ -50,8 +47,8 @@ namespace AthenaBackend.Infrastructure.Migrations.ReadDb
 
             ");
 
-            migrationBuilder.Sql(@"drop view ThemebookConceptUI;");
-            migrationBuilder.Sql($@"
+                migrationBuilder.Sql(@"drop view ThemebookConceptUI;");
+                migrationBuilder.Sql($@"
                 CREATE VIEW ThemebookConceptUI
                 AS
                 SELECT [Id]
@@ -63,8 +60,8 @@ namespace AthenaBackend.Infrastructure.Migrations.ReadDb
                 WHERE [IsDeleted] = 0;
             ");
 
-            migrationBuilder.Sql(@"drop view TagQuestionUI;");
-            migrationBuilder.Sql($@"
+                migrationBuilder.Sql(@"drop view TagQuestionUI;");
+                migrationBuilder.Sql($@"
                 CREATE VIEW TagQuestionUI
                 AS
                 SELECT [Id]
@@ -76,16 +73,16 @@ namespace AthenaBackend.Infrastructure.Migrations.ReadDb
                 FROM [TagQuestion]
                 WHERE [IsDeleted] = 0;
             ");
-        }
+            }
 
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.Sql(@"drop view ThemebookUI;");
-            migrationBuilder.Sql(@"drop view ThemebookImprovementUI;");
-            migrationBuilder.Sql(@"drop view ThemebookConceptUI;");
-            migrationBuilder.Sql(@"drop view TagQuestionUI;");
+            protected override void Down(MigrationBuilder migrationBuilder)
+            {
+                migrationBuilder.Sql(@"drop view ThemebookUI;");
+                migrationBuilder.Sql(@"drop view ThemebookImprovementUI;");
+                migrationBuilder.Sql(@"drop view ThemebookConceptUI;");
+                migrationBuilder.Sql(@"drop view TagQuestionUI;");
+            }
         }
     }
-}
 
 }

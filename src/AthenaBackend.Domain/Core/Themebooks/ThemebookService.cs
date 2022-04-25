@@ -14,7 +14,7 @@ namespace AthenaBackend.Domain.Core.Themebooks
 
         public async Task<Themebook> Create(ThemebookDto dto)
         {
-            if (await themebookRepository.IsUniqueByCode(dto.Name))
+            if (await themebookRepository.IsUniqueByCode(dto.Name) == false)
             {
                 throw new CodeAlreadyExistsDomainException(nameof(Themebook), nameof(dto.Name));
             }

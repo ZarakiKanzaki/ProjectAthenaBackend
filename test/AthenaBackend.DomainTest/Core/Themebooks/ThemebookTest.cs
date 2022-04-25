@@ -38,7 +38,7 @@ namespace AthenaBackend.DomainTest.Core.Themebooks
         {
             var invalidDto = GetInvalidDtoWithValidName();
 
-            themebookRepositoryMock.Setup(a => a.IsUniqueByCode(It.IsAny<string>())).ReturnsAsync(false);
+            themebookRepositoryMock.Setup(a => a.IsUniqueByCode(It.IsAny<string>())).ReturnsAsync(true);
 
             Should.ThrowAsync<DomainException>(async () => await themebookServiceMock.Create(invalidDto));
         }
@@ -81,6 +81,7 @@ namespace AthenaBackend.DomainTest.Core.Themebooks
         {
             var validDtoWithoutCollections = GetValidDtoWithoutCollections();
 
+            themebookRepositoryMock.Setup(a => a.IsUniqueByCode(It.IsAny<string>())).ReturnsAsync(true);
             var createdThemebook = await themebookServiceMock.Create(validDtoWithoutCollections);
 
             themebookRepositoryMock.Verify(t =>
@@ -93,13 +94,15 @@ namespace AthenaBackend.DomainTest.Core.Themebooks
         [Test]
         public async Task Update_ValidNameButNonUniqueCodeDto_ThrowsDomainException()
         {
+            themebookRepositoryMock.Setup(a => a.IsUniqueByCode(It.IsAny<string>())).ReturnsAsync(true);
+
             var invalidDto = GetInvalidDtoWithValidName();
             var existentDto = GetExistantDto();
 
             var existentThemebook = await themebookServiceMock.Create(existentDto);
 
-            themebookRepositoryMock.Setup(a => a.IsUniqueByCode(It.IsAny<string>())).ReturnsAsync(false);
             themebookRepositoryMock.Setup(a => a.GetByCode(It.IsAny<string>())).ReturnsAsync(existentThemebook);
+
 
             await themebookServiceMock.Update(invalidDto).ShouldThrowAsync<DomainException>();
         }
@@ -110,9 +113,11 @@ namespace AthenaBackend.DomainTest.Core.Themebooks
             var invalidDto = GetInvalidDtoWithValidName();
             var existentDto = GetExistantDto();
 
-            var existentThemebook = await themebookServiceMock.Create(existentDto);
 
             themebookRepositoryMock.Setup(a => a.IsUniqueByCode(It.IsAny<string>())).ReturnsAsync(true);
+
+            var existentThemebook = await themebookServiceMock.Create(existentDto);
+            
             themebookRepositoryMock.Setup(a => a.GetByCode(It.IsAny<string>())).ReturnsAsync(existentThemebook);
 
             await themebookServiceMock.Update(invalidDto).ShouldThrowAsync<DomainException>();
@@ -124,6 +129,7 @@ namespace AthenaBackend.DomainTest.Core.Themebooks
         {
             var invalidDto = GetInvalidDtoForUpdate();
             var existentDto = GetExistantDto();
+
             await SetupForUpdate(invalidDto, existentDto);
 
             await themebookServiceMock.Update(invalidDto).ShouldThrowAsync<AggregateException>();
@@ -137,6 +143,7 @@ namespace AthenaBackend.DomainTest.Core.Themebooks
             var invalidImprovementDto = GetValidThemebookWithInvalidImprovementDto();
 
             var existentDto = GetExistantDto();
+
             await SetupForUpdate(invalidImprovementDto, existentDto);
 
             await themebookServiceMock.Update(invalidImprovementDto).ShouldThrowAsync<AggregateException>();
@@ -147,6 +154,7 @@ namespace AthenaBackend.DomainTest.Core.Themebooks
         {
             var invalidTagQuestionDto = GetValidThemebookWithInvalidTagQuestionDto();
             var existentDto = GetExistantDto();
+
             await SetupForUpdate(invalidTagQuestionDto, existentDto);
 
             await themebookServiceMock.Update(invalidTagQuestionDto).ShouldThrowAsync<DomainException>();
@@ -158,6 +166,7 @@ namespace AthenaBackend.DomainTest.Core.Themebooks
         {
             var invalidConceptDto = GetValidThemebookDtoWithInvalidConcept();
             var existentDto = GetExistantDto();
+
             await SetupForUpdate(invalidConceptDto, existentDto);
 
             await themebookServiceMock.Update(invalidConceptDto).ShouldThrowAsync<DomainException>();
@@ -169,13 +178,15 @@ namespace AthenaBackend.DomainTest.Core.Themebooks
         #region Utility Functions
         private async Task SetupForUpdate(ThemebookDto invalidDto, ThemebookDto existentDto)
         {
-            var existentThemebook = await themebookServiceMock.Create(existentDto);
-
-            invalidDto.Id = existentThemebook.Id;
 
             themebookRepositoryMock.Setup(a => a.IsUniqueByCode(It.IsAny<string>())).ReturnsAsync(true);
+            
+            var existentThemebook = await themebookServiceMock.Create(existentDto);
+            invalidDto.Id = existentThemebook.Id;
+
             themebookRepositoryMock.Setup(a => a.GetByCode(It.IsAny<string>())).ReturnsAsync(existentThemebook);
             themebookRepositoryMock.Setup(a => a.GetByKey(It.IsAny<Guid>())).ReturnsAsync(existentThemebook);
+
         }
 
         private static bool IsThemebookTheSameCreated(Themebook themebook, Themebook createdThemebook)

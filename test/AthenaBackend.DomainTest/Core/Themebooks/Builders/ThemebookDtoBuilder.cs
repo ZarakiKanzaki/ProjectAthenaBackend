@@ -29,7 +29,7 @@ namespace AthenaBackend.DomainTest.Core.Themebooks.Builders
                 TypeId = typeId,
                 ThemebookConcept = themebookConcept,
                 ExamplesOfApplication = examplesOfApplication,
-                MisteryOptions = misteryOptions,
+                IdentityMisteryOptions = misteryOptions,
                 TitleExamples = titleExamples,
                 CrewRelationships = crewRelationships,
                 TagQuestions = tagQuestions,

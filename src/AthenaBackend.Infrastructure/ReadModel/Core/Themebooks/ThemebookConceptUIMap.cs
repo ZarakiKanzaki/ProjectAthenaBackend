@@ -11,7 +11,7 @@ namespace AthenaBackend.Infrastructure.ReadModel.Core.Themebooks
         public void Configure(EntityTypeBuilder<ThemebookConceptUI> builder)
         {
             builder.ToView(nameof(ThemebookConceptUI));
-            
+
             builder.HasNoKey();
             builder.Property(x => x.Question);
 

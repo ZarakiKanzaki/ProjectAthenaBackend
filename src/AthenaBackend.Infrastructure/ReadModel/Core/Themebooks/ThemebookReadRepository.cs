@@ -1,11 +1,11 @@
-﻿using System;
-using System.Linq;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using AthenaBackend.Common.DomainDrivenDesign;
+﻿using AthenaBackend.Common.DomainDrivenDesign;
+using AthenaBackend.Domain.Exceptions;
 using AthenaBackend.Infrastructure.ReadModel.Core.Themebooks.UI;
 using Microsoft.EntityFrameworkCore;
-using AthenaBackend.Domain.Exceptions;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace AthenaBackend.Infrastructure.ReadModel.Core.Themebooks
 {
@@ -82,7 +82,7 @@ namespace AthenaBackend.Infrastructure.ReadModel.Core.Themebooks
         }
 
         #region Private functions
-        private ThemebookConceptUI GetConceptSync(ThemebookUI themebook) 
+        private ThemebookConceptUI GetConceptSync(ThemebookUI themebook)
             => Context.ThemebookConceptUI.FirstOrDefault(tc => tc.ThemebookId == themebook.Id);
 
         private async Task<ThemebookUI> FindThemebookByKey(Guid id)

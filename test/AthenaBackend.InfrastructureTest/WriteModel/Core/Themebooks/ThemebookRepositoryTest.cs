@@ -5,7 +5,6 @@ using AthenaBackend.DomainTest.Core.Themebooks.Builders;
 using AthenaBackend.DomainTest.Core.Themebooks.Defaults;
 using AthenaBackend.Infrastructure;
 using AthenaBackend.Infrastructure.WriteModel.Core.Themebooks;
-using AthenaBackend.InfrastructureTest.ReadModel.Core.Themebooks.Defaults;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using Moq.EntityFrameworkCore;
@@ -122,7 +121,7 @@ namespace AthenaBackend.InfrastructureTest.WriteModel.Core.Themebooks
         private void InitializeService()
         {
             themebookRepositoryMock = new Mock<IThemebookRepository>();
-            themebookRepositoryMock.Setup(a => a.IsUniqueByCode(It.IsAny<string>())).ReturnsAsync(false);
+            themebookRepositoryMock.Setup(a => a.IsUniqueByCode(It.IsAny<string>())).ReturnsAsync(true);
             themebookServiceMock = new ThemebookService(themebookRepositoryMock.Object);
         }
 

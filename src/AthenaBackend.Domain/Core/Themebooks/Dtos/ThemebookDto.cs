@@ -12,7 +12,7 @@ namespace AthenaBackend.Domain.Core.Themebooks.Dtos
         public short TypeId { get; set; }
         public ThemebookConceptDto ThemebookConcept { get; set; }
         public List<string> ExamplesOfApplication { get; set; } = new List<string>();
-        public List<string> MisteryOptions { get; set; } = new List<string>();
+        public List<string> IdentityMisteryOptions { get; set; } = new List<string>();
         public List<string> TitleExamples { get; set; } = new List<string>();
         public List<string> CrewRelationships { get; set; } = new List<string>();
         public List<TagQuestionDto> TagQuestions { get; set; } = new List<TagQuestionDto>();
