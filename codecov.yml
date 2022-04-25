@@ -1,3 +1,5 @@
 ignore:
   - "src/AthenaBackend.Infrastructure/Migrations/**/*" 
+  - "src/AthenaBackend.Infrastructure/ReadModel/**/*map.cs" 
+  - "src/AthenaBackend.Infrastructure/WriteModel/**/*map.cs" 
   - "src/AthenaBackend.Infrastructure/Migrations/*" 

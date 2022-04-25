@@ -6,7 +6,6 @@ using System;
 
 namespace AthenaBackend.Domain.Core.Characters
 {
-
     public class Tag : Entity
     {
         #region Properties

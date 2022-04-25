@@ -32,7 +32,8 @@ namespace AthenaBackend.WebApi
 
 
             services.AddGraphQLServer()
-                    .AddQueryType<Query>();
+                    .AddQueryType<Query>()
+                    .AddMutationType<Mutation>();
 
             services.AddApplication();
             services.AddInfrastructure(Configuration);

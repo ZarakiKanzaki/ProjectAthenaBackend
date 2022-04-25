@@ -8,6 +8,7 @@ namespace AthenaBackend.Domain.Core.Characters.Dtos
 {
     public class CharacterDto
     {
+
         public Guid? Id { get; set; }
         public Guid UserId { get; set; }
         public string Name { get; set; }

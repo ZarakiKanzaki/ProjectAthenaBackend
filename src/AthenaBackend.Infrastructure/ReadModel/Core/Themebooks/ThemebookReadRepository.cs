@@ -63,28 +63,18 @@ namespace AthenaBackend.Infrastructure.ReadModel.Core.Themebooks
 
         public async Task<IEnumerable<ThemebookUI>> GetList()
         {
-            return await Task.FromResult(Context.ThemebookUI.Select(t =>
-                    new ThemebookUI
-                    {
-                        CrewRelationships = t.CrewRelationships,
-                        Description = t.Description,
-                        ExamplesOfApplication = t.ExamplesOfApplication,
-                        Id = t.Id,
-                        Name = t.Name,
-                        MisteryOptions = t.MisteryOptions,
-                        TitleExamples = t.TitleExamples,
-                        Type = t.Type,
-                        Improvements = GetImprovements(t).ToList(),
-                        TagQuestions = GetTagQuestions(t).ToList(),
-                        ThemebookConcept = GetConceptSync(t),
-                    }
-                ).AsEnumerable());
+            var allThemebooks = new List<ThemebookUI>();
+            var themebookIds = await Context.ThemebookUI.Select(x => x.Id).ToListAsync();
+
+            foreach (var id in themebookIds)
+            {
+                allThemebooks.Add(await GetByKey(id));
+            }
+
+            return allThemebooks;
         }
 
         #region Private functions
-        private ThemebookConceptUI GetConceptSync(ThemebookUI themebook)
-            => Context.ThemebookConceptUI.FirstOrDefault(tc => tc.ThemebookId == themebook.Id);
-
         private async Task<ThemebookUI> FindThemebookByKey(Guid id)
             => await Context.ThemebookUI.FindAsync(id);
 

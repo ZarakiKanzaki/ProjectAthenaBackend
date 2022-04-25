@@ -1,4 +1,5 @@
-﻿using AthenaBackend.Domain.Core.Themebooks;
+﻿using AthenaBackend.Domain.Core.Characters;
+using AthenaBackend.Domain.Core.Themebooks;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
@@ -11,6 +12,7 @@ namespace AthenaBackend.Infrastructure
         }
 
         public virtual DbSet<Themebook> Themebooks { get; set; }
+        public virtual DbSet<Character> Characters { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

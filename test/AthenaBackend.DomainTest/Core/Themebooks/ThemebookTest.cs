@@ -117,7 +117,7 @@ namespace AthenaBackend.DomainTest.Core.Themebooks
             themebookRepositoryMock.Setup(a => a.IsUniqueByCode(It.IsAny<string>())).ReturnsAsync(true);
 
             var existentThemebook = await themebookServiceMock.Create(existentDto);
-            
+
             themebookRepositoryMock.Setup(a => a.GetByCode(It.IsAny<string>())).ReturnsAsync(existentThemebook);
 
             await themebookServiceMock.Update(invalidDto).ShouldThrowAsync<DomainException>();
@@ -180,7 +180,7 @@ namespace AthenaBackend.DomainTest.Core.Themebooks
         {
 
             themebookRepositoryMock.Setup(a => a.IsUniqueByCode(It.IsAny<string>())).ReturnsAsync(true);
-            
+
             var existentThemebook = await themebookServiceMock.Create(existentDto);
             invalidDto.Id = existentThemebook.Id;
 
