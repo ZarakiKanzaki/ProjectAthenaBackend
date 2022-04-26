@@ -76,7 +76,7 @@ namespace AthenaBackend.Infrastructure.ReadModel.Core.Themebooks
 
         #region Private functions
         private async Task<ThemebookUI> FindThemebookByKey(Guid id)
-            => await Context.ThemebookUI.FindAsync(id);
+            => await Context.ThemebookUI.FirstOrDefaultAsync(x => x.Id == id);
 
         private async Task<ThemebookUI> FindThemebookByCode(string code)
             => await Context.ThemebookUI.FirstOrDefaultAsync(t => t.Name.ToLower().Equals(code.ToLower()));

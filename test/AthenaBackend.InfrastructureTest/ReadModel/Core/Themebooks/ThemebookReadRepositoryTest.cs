@@ -118,6 +118,7 @@ namespace AthenaBackend.InfrastructureTest.ReadModel.Core.Themebooks
             context.Setup(c => c.ThemebookConceptUI).ReturnsDbSet(concepts);
             context.Setup(c => c.TagQuestionUI).ReturnsDbSet(tags);
             context.Setup(c => c.ThemebookImprovementUI).ReturnsDbSet(improvements);
+            context.Setup(c => c.ThemebookUI.FindAsync(It.IsAny<Guid>())).ReturnsAsync(themebooks.FirstOrDefault(x => x.Id == It.IsAny<Guid>()));
         }
 
         private static void HandleThemebookIdForEntities(List<ThemebookUI> themebooks, List<ThemebookConceptUI> concepts, List<TagQuestionUI> tags, List<ThemebookImprovementUI> improvements)
