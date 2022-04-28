@@ -16,7 +16,7 @@ namespace AthenaBackend.Infrastructure.ReadModel.Core.User
 
         public async Task<UserUI> FindByCode(string code) => await FindUser(code);
 
-        private Task<UserUI> FindUser(string code) => Context.UserUI.FirstOrDefaultAsync(x => x.GuildMemberId == code);
+        private Task<UserUI> FindUser(string code) => Context.UserUI.FirstOrDefaultAsync(x => x.GuildMemberId.ToLower().Equals(code.ToLower()));
 
         public async Task<UserUI> FindByKey(Guid id) => await Context.UserUI.FirstOrDefaultAsync(x => x.Id == id);
 
