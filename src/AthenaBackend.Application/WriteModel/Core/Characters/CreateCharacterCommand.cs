@@ -34,7 +34,7 @@ namespace AthenaBackend.Application.WriteModel.Core.Characters
         public async Task<bool> Handle(CreateCharacterCommand request, CancellationToken cancellationToken)
         {
             var userId = (await readRepository.GetByCode(request.Character.GuildMember)).Id;
-            request.Character.Id = userId;
+            request.Character.UserId = userId;
             var createdCharacter = await characterService.Create(converter.Convert(request.Character));
 
             return createdCharacter != null;
