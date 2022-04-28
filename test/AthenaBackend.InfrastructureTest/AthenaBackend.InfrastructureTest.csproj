@@ -8,12 +8,21 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
+    <PackageReference Include="Moq" Version="4.17.2" />
+    <PackageReference Include="Moq.EntityFrameworkCore" Version="5.0.0.2" />
     <PackageReference Include="NUnit" Version="3.13.1" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
     <PackageReference Include="coverlet.collector" Version="3.1.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Shouldly" Version="4.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\AthenaBackend.Domain\AthenaBackend.Domain.csproj" />
+    <ProjectReference Include="..\..\src\AthenaBackend.Infrastructure\AthenaBackend.Infrastructure.csproj" />
+    <ProjectReference Include="..\AthenaBackend.DomainTest\AthenaBackend.DomainTest.csproj" />
   </ItemGroup>
 
 </Project>

@@ -9,3 +9,8 @@ github_checks: true
 coverage:
   status:
     patch: false
+ignore:
+  - "src/AthenaBackend.Infrastructure/Migrations/**/*" 
+  - "src/AthenaBackend.Infrastructure/ReadModel/**/*map.cs" 
+  - "src/AthenaBackend.Infrastructure/WriteModel/**/*map.cs" 
+  - "src/AthenaBackend.Infrastructure/Migrations/*" 

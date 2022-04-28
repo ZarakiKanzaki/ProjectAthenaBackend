@@ -1,11 +1,8 @@
+using AthenaBackend.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace AthenaBackend.WebApi
 {
@@ -13,10 +10,40 @@ namespace AthenaBackend.WebApi
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            var host = CreateHostBuilder(args).Build();
+
+            MigrateToLatestVersionOfDb(host);
+
+            host.Run();
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) 
+        private static void MigrateToLatestVersionOfDb(IHost host)
+        {
+            using var scope = host.Services.CreateScope();
+
+            HandleWriteContext(scope);
+            HandleReadContext(scope);
+        }
+
+        private static void HandleWriteContext(IServiceScope scope)
+        {
+            IDbContextFactory<WriteDbContext> writeContextFactory =
+                scope.ServiceProvider.GetRequiredService<IDbContextFactory<WriteDbContext>>();
+            using var writeContext = writeContextFactory.CreateDbContext();
+
+            writeContext.Database.Migrate();
+        }
+
+        private static void HandleReadContext(IServiceScope scope)
+        {
+            IDbContextFactory<ReadDbContext> readContextFactory =
+                 scope.ServiceProvider.GetRequiredService<IDbContextFactory<ReadDbContext>>();
+            using var readContext = readContextFactory.CreateDbContext();
+
+            readContext.Database.Migrate();
+        }
+
+        public static IHostBuilder CreateHostBuilder(string[] args)
             => Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
