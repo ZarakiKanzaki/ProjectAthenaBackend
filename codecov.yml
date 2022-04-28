@@ -1,4 +1,8 @@
-secret:v1::tEojND4U5v5fHEXFTbev9xB121gtNK56mBF6oiLezqths5lomJ/7wxq8oWmEyO28cznhNyrVKZZRvmdJwAdMow==
+ignore:
+  - "src/AthenaBackend.Infrastructure/Migrations/**/*" 
+  - "src/AthenaBackend.Infrastructure/ReadModel/**/*map.cs" 
+  - "src/AthenaBackend.Infrastructure/WriteModel/**/*map.cs" 
+  - "src/AthenaBackend.Infrastructure/Migrations/*" 
 comment:                  # this is a top-level key
   layout: "reach, diff, flags, files"
   behavior: default
@@ -9,8 +13,4 @@ github_checks: true
 coverage:
   status:
     patch: false
-ignore:
-  - "src/AthenaBackend.Infrastructure/Migrations/**/*" 
-  - "src/AthenaBackend.Infrastructure/ReadModel/**/*map.cs" 
-  - "src/AthenaBackend.Infrastructure/WriteModel/**/*map.cs" 
-  - "src/AthenaBackend.Infrastructure/Migrations/*" 
+
