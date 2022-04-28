@@ -1,3 +1,4 @@
+[![codecov](https://codecov.io/gh/ZarakiKanzaki/ProjectAthenaBackend/branch/main/graph/badge.svg?token=X0BGHSLS4G)](https://codecov.io/gh/ZarakiKanzaki/ProjectAthenaBackend)
 
 # ProjectAthenaBackend
 
