@@ -1,7 +1,6 @@
 ignore:
   - "src/AthenaBackend.Infrastructure/Migrations/**/*" 
-  - "src/AthenaBackend.Infrastructure/ReadModel/**/*map.cs" 
-  - "src/AthenaBackend.Infrastructure/WriteModel/**/*map.cs" 
+  - "**/*Map.cs" 
   - "src/AthenaBackend.Infrastructure/Migrations/*" 
 comment:                  # this is a top-level key
   layout: "reach, diff, flags, files"
