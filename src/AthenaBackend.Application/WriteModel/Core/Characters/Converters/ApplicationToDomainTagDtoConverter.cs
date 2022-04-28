@@ -1,4 +1,5 @@
 ﻿using AthenaBackend.Common.Converters;
+using AthenaBackend.Domain.Enums;
 using ApplicationTagDto = AthenaBackend.Application.WriteModel.Core.Characters.Dtos.TagDto;
 using DomainTagDto = AthenaBackend.Domain.Core.Characters.Dtos.TagDto;
 
@@ -13,7 +14,7 @@ namespace AthenaBackend.Application.WriteModel.Core.Characters.Converters
                 Name = objectToConvert.Name,
                 IsSubtractive = objectToConvert.IsSubtractive,
                 Level = objectToConvert.Level,
-                Type = objectToConvert.Type,
+                Type = (TagType)objectToConvert.Type,
             };
     }
 }

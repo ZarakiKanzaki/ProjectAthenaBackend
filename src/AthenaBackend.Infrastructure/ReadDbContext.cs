@@ -1,4 +1,5 @@
 ﻿using AthenaBackend.Infrastructure.ReadModel.Core.Themebooks.UI;
+using AthenaBackend.Infrastructure.ReadModel.Core.User.UI;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
@@ -15,6 +16,7 @@ namespace AthenaBackend.Infrastructure
         public virtual DbSet<ThemebookConceptUI> ThemebookConceptUI { get; set; }
         public virtual DbSet<ThemebookImprovementUI> ThemebookImprovementUI { get; set; }
         public virtual DbSet<TagQuestionUI> TagQuestionUI { get; set; }
+        public virtual DbSet<UserUI> UserUI { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

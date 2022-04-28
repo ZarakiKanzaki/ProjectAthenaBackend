@@ -1,8 +1,8 @@
-﻿using System;
-using AthenaBackend.Common.DependecyInjection.Middlewares;
+﻿using AthenaBackend.Common.DependecyInjection.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using System;
 
 namespace AthenaBackend.Common.DependecyInjection
 {

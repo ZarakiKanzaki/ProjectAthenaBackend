@@ -13,7 +13,7 @@ namespace AthenaBackend.Common.DependecyInjection.Middlewares
         public async Task Invoke(HttpContext httpContext, T dbContext)
         {
             await next(httpContext);
-            
+
             await dbContext.SaveChangesAsync();
         }
     }

@@ -7,7 +7,7 @@ namespace AthenaBackend.Application.WriteModel.Core.Characters.Dtos
     {
         public Guid? Id { get; set; }
         public Guid ThemebookId { get; set; }
-        public Guid CharacterId { get; set; }
+        public Guid? CharacterId { get; set; }
         public short TypeId { get; set; }
         public string Title { get; set; }
         public string Concept { get; set; }

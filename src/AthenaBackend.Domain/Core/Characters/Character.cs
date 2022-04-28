@@ -94,7 +94,8 @@ namespace AthenaBackend.Domain.Core.Characters
         #region Themebooks
         private void HandleThemebooks(List<CharacterThemebookDto> themebooks)
         {
-            var toAdd = themebooks.Where(themebook => themebook.Id is null);
+            var toAdd = themebooks.Where(t => t.Id is null || Themebooks.Any(themebook => themebook.IsDeleted == false
+                                                                                       && themebook.Id != t.Id));
             var toUpdate = themebooks.Where(t => Themebooks.Any(themebook => themebook.IsDeleted == false
                                                                           && themebook.Id == t.Id));
             var toRemove = Themebooks.Where(t => t.IsDeleted == false)

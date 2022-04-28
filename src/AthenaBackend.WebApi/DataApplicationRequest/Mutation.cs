@@ -11,10 +11,10 @@ namespace AthenaBackend.WebApi.DataApplicationRequest
     public class Mutation
     {
 
-        public async Task<bool> CreateCharacter([Service] ISender Mediator, CharacterDto character) 
+        public async Task<bool> CreateCharacter([Service] ISender Mediator, CharacterDto character)
             => await Mediator.Send(new CreateCharacterCommand(character));
-        
-        public async Task<bool> CreateThemebook([Service] ISender Mediator, ThemebookDto themebook) 
+
+        public async Task<bool> CreateThemebook([Service] ISender Mediator, ThemebookDto themebook)
             => await Mediator.Send(new CreateThemebookCommand(themebook));
 
     }

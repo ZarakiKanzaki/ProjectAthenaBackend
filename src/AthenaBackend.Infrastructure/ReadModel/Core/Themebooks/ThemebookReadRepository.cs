@@ -71,7 +71,7 @@ namespace AthenaBackend.Infrastructure.ReadModel.Core.Themebooks
                 allThemebooks.Add(await GetByKey(id));
             }
 
-            return allThemebooks;
+            return allThemebooks.OrderBy(x => x.Type.Id);
         }
 
         #region Private functions

@@ -31,7 +31,7 @@ namespace AthenaBackend.Application.WriteModel.Core.Characters.Converters
                 Mythos = objectToConvert.Mythos,
                 Name = objectToConvert.Name,
                 Note = objectToConvert.Note,
-                UserId = objectToConvert.UserId,
+                UserId = objectToConvert.UserId.GetValueOrDefault(),
                 Tags = ConvertTags(objectToConvert),
                 Themebooks = ConvertThemebooks(objectToConvert),
             };

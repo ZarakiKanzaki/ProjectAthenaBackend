@@ -6,12 +6,13 @@ namespace AthenaBackend.Application.WriteModel.Core.Themebooks.Converters
 {
     public class ApplicationToDomainThembookConceptDtoConverter : BaseConverterWithValidation<ApplicationThemebookConceptDto, DomainThemebookConceptDto, ApplicationToDomainThembookConceptDtoConverter>
     {
-        protected override DomainThemebookConceptDto GetConvertedObject(ApplicationThemebookConceptDto objectToConvert) 
+        protected override DomainThemebookConceptDto GetConvertedObject(ApplicationThemebookConceptDto objectToConvert)
             => new()
             {
                 Id = objectToConvert.Id,
                 Question = objectToConvert.Question,
                 UserId = objectToConvert.UserId,
+                Answers = objectToConvert.Answers,
             };
     }
 }
